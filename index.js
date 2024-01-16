@@ -4,6 +4,8 @@ require('dotenv').config();
 const database = require("./config/database");
 
 database.connect();
+
+const routeAdmin = require("./routes/admin/index.route");
 const route = require("./routes/client/index.route");
 
 const app = express();
@@ -18,6 +20,7 @@ app.use(express.static('public'));
 
 
 //routes
+routeAdmin(app);
 route(app);
 
 
