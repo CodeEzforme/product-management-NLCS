@@ -16,8 +16,8 @@ if(buttonStatus.length > 0) {
         });
     });
 }
-
 // hết button-status
+
 
 // form search
 const formSearch = document.querySelector("#form-search");
@@ -37,5 +37,21 @@ if(formSearch) {
         window.location.href = url.href;
     });
 }
-
 // Hết from search
+
+// Pagination
+const buttonsPagination = document.querySelectorAll("[button-pagination]");
+if(buttonsPagination.length > 0) {
+    let url = new URL(window.location.href);
+
+    buttonsPagination.forEach(button => {
+        button.addEventListener("click", () => {
+            const page = button.getAttribute("button-pagination");
+
+            url.searchParams.set("page", page);
+
+            window.location.href = url.href;
+        });
+    });
+}
+//  Hết Pagination
