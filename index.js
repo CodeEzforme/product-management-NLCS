@@ -1,4 +1,5 @@
 const express  = require("express");
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 const database = require("./config/database");
@@ -16,6 +17,9 @@ app.set("views", "./views");
 app.set("view engine", "pug");
 
 app.use(express.static('public'));
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 // biến toàn cục
 app.locals.prefixAdmin = systemConfig.prefixAdmin;

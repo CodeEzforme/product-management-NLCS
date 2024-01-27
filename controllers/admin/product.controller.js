@@ -3,10 +3,10 @@ const Product = require("../../models/product.mode");
 const filterStatusHelper = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination");
+const { response } = require("express");
 
-// Hỗ trợ route [GET] /admin/products /////////////
+// Hỗ trợ route [GET] /admin/products/change-status/:status/:id/////////////
 module.exports.index = async(req, res) => {
-
     const filterStatus = filterStatusHelper(req.query);
     const objectSearch = searchHelper(req.query);
 
@@ -44,4 +44,14 @@ module.exports.index = async(req, res) => {
         keyword: objectSearch.keyword,
         pagination: objectPagination
     });
+}
+
+// [GET] /admin/products
+module.exports.changeStatus = async (req, res) => {
+    const status = req.params.status;
+    const id = req.params.id;
+
+    await Product.updateOne({ _id: id }, { status: status });
+
+    res.redirect("back");
 }
