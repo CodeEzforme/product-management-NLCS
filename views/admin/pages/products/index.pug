@@ -2,6 +2,7 @@ extends ../../layouts/default
 include ../../mixins/filter-status
 include ../../mixins/search
 include ../../mixins/pagination
+include ../../mixins/change-multi
 
 block main
     h1(class="mb-4") Danh sách sản phẩm
@@ -17,47 +18,72 @@ block main
     .card.mb-3
         .card-header Danh sách
         .card-body
-            table.table.table-hover.table-sm
+
+            +change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
+
+            table(
+                class="table table-hover table-sm"
+                checkbox-multi
+            )
                 thead
                     tr
+                        th
+                            input(type="checkbox" name="checkall")
                         th STT
                         th Hình ảnh
                         th Tiêu đề
                         th Giá
                         th Trạng thái
-                        th Hạnh động
+                        th Hành động
 
                 tbody
-                    each item, index in products
+                    if (products.length > 0)
+                        each item, index in products
+                            tr
+                                td
+                                    input(
+                                        type="checkbox"
+                                        name="id"
+                                        value=item.id
+                                    )
+                                td #{index + 1}
+                                td
+                                    img(
+                                        src=item.thumbnail
+                                        alt=item.title
+                                        width="100px"
+                                        height="auto"
+                                    )
+                                td #{item.title}
+                                td #{item.price}$
+                                td
+                                    if(item.status == "active")
+                                        button(
+                                            class="badge badge-success"
+                                            button-change-status
+                                            data-status=item.status
+                                            data-id=item.id
+                                        ) Hoạt động
+                                    else
+                                        button(
+                                            class="badge badge-danger"
+                                            button-change-status
+                                            data-status=item.status
+                                            data-id=item.id
+                                        ) Dừng hoạt động
+                                td
+                                    button(class="btn btn-warning btn-sm") Sửa
+                                    button(
+                                        class="btn btn-danger btn-sm ml-1"
+                                        button-delete
+                                        data-id=item.id
+                                    ) Xóa
+                    else
                         tr
-                            td #{index + 1}
                             td
-                                img(
-                                    src=item.thumbnail
-                                    alt=item.title
-                                    width="100px"
-                                    height="auto"
-                                )
-                            td #{item.title}
-                            td #{item.price}$
-                            td
-                                if(item.status == "active")
-                                    button(
-                                        class="badge badge-success"
-                                        button-change-status
-                                        data-status=item.status
-                                        data-id=item.id
-                                    ) Hoạt động
-                                else
-                                    button(
-                                        class="badge badge-danger"
-                                        button-change-status
-                                        data-status=item.status
-                                        data-id=item.id
-                                    ) Dừng hoạt động
-                            td
-                                button(class="btn btn-warning btn-sm") Sửa
-                                button(class="btn btn-danger btn-sm ml-1") Xóa
+                                .col-7
+                                    .text-center No found item
+
 
     form(
         id="form-change-status"
@@ -66,4 +92,12 @@ block main
         data-path=`/${prefixAdmin}/products/change-status`
     )
 
+    form(
+        id="form-delete-item"
+        method="POST"
+        action=""
+        data-path=`/${prefixAdmin}/products/delete`
+    )
+
     +pagination(pagination)
+
