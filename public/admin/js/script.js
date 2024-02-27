@@ -128,7 +128,7 @@ if(formChangeMulti) {
         const typeChange = e.target.elements.type.value;
 
         if(typeChange == "delete-all") {
-            const isConfirm = confirm("Bạn có chắc muốn xóa những sản phẩm này?");
+            const isConfirm = confirm("Bạn có chắc muốn xóa những bản ghi này?");
 
             if(!isConfirm) {
                 return;
