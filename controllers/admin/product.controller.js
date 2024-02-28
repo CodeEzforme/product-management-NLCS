@@ -47,7 +47,7 @@ module.exports.index = async(req, res) => {
         keyword: objectSearch.keyword,
         pagination: objectPagination
     });
-}
+};
 
 // [PATH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
@@ -55,9 +55,9 @@ module.exports.changeStatus = async (req, res) => {
     const id = req.params.id;
 
     await Product.updateOne({ _id: id }, { status: status });
-
+    req.flash("success", "Cập nhật trạng thái thành công!");
     res.redirect("back");
-}
+};
 
 // [PATH] /admin/products/change-multi
 module.exports.changeMulti = async (req, res) => {
@@ -85,7 +85,7 @@ module.exports.changeMulti = async (req, res) => {
             break;
     }
     res.redirect("back");
-}
+};
 
 // [DELETE] /admin/products/delete/:id
 module.exports.deleteItem = async (req, res) => {
@@ -97,4 +97,4 @@ module.exports.deleteItem = async (req, res) => {
     });
 
     res.redirect("back");
-}
+};

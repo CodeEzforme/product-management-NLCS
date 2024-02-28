@@ -3,8 +3,11 @@ include ../../mixins/filter-status
 include ../../mixins/search
 include ../../mixins/pagination
 include ../../mixins/change-multi
+include ../../mixins/alert
 
 block main
+    +alert-success(5000)
+
     h1(class="mb-4") Danh sách sản phẩm
 
     .card.mb-3
