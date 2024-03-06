@@ -131,21 +131,26 @@ module.exports.createPost = async (req, res) => {
     const product = new Product(req.body);
     await product.save();
 
+    req.flash("success", "Sản phẩm đã được thêm!");
     res.redirect(`/${systemConfig.prefixAdmin}/products`);
 };
 
 // [GET] /admin/products/edit/:id
 module.exports.edit = async (req, res) => {
-    const id = req.params.id;
+    try {
+        const id = req.params.id;
 
-    const product = await Product.findOne({ _id: id, deleted: false});
+        const product = await Product.findOne({ _id: id, deleted: false});
 
-    console.log(product);
-
-    res.render("admin/pages/products/edit", {
-        pageTitle: "Chỉnh sửa sản phẩm",
-        product: product
-    });
+        res.render("admin/pages/products/edit", {
+            pageTitle: "Chỉnh sửa sản phẩm",
+            product: product
+        });
+    } catch (err) {
+        req.flash("error", "Không tồn tại sản phẩm!");
+        res.redirect(`/${systemConfig.prefixAdmin}/products`);
+    }
+    // problem try catch
 };
 
 // [PATCH] /admin/products/edit/:id
@@ -154,8 +159,7 @@ module.exports.editPatch = async (req, res) => {
 
     req.body.price = parseInt(req.body.price);
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
-    req.body.stock = parseInt(req.body.stock);
-
+    req.body.stock = parseInt(req.body.stock);0
     req.body.position = parseInt(req.body.position);
 
     if(req.file && req.file.filename) {
@@ -167,4 +171,21 @@ module.exports.editPatch = async (req, res) => {
     req.flash("success", "Cập nhật sản phẩm thành công!");
 
     res.redirect("back");
+};
+
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const product = await Product.findOne({ _id: id, deleted: false});
+
+        res.render("admin/pages/products/detail", {
+            pageTitle: "Chi tiết sản phẩm",
+            product: product
+        });
+    } catch (err) {
+        req.flash("error", "Không tồn tại sản phẩm!");
+        res.redirect(`/${systemConfig.prefixAdmin}/products`);
+    }
 };
