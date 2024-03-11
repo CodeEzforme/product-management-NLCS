@@ -17,7 +17,7 @@ const route = require("./routes/client/index.route");
 const app = express();
 const port = process.env.PORT;
 
-app.set("views", '${__dirname}/views');
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 // Flash
@@ -26,7 +26,7 @@ app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
 // Hết Flash
 
-app.use(express.static('${__dirname}/public'));
+app.use(express.static(`${__dirname}/public`));
 
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))
