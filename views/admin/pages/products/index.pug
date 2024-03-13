@@ -4,6 +4,7 @@ include ../../mixins/search
 include ../../mixins/pagination
 include ../../mixins/change-multi
 include ../../mixins/alert
+include ../../mixins/sort
 
 block main
     +alert-success(5000)
@@ -19,6 +20,14 @@ block main
                    +filter-status(filterStatus)
                 .col-6
                    +search(keyword)
+
+    .card.mb-3
+        .card-header Sắp xếp
+        .card-body
+            .row
+                .col-4
+                    +sort()
+
     .card.mb-3
         .card-header Danh sách
         .card-body
