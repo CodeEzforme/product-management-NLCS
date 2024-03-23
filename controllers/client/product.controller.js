@@ -1,4 +1,4 @@
-const Product = require("../../models/product.mode");
+const Product = require("../../models/product.model");
 
 // hỗ trợ router [GET] /products
 module.exports.index = async(req, res) => {
