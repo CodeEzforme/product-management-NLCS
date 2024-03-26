@@ -1,6 +1,9 @@
 extends ../../layouts/default
+include ../../mixins/alert.pug
 
 block main
+    +alert-success(5000)
+    +alert-error(5000)
     h1(class="mb-4") Nhóm quyền
 
     .card.mb-3
@@ -30,7 +33,7 @@ block main
                             tr
                                 td #{index + 1}
                                 td #{item.title}
-                                td #{item.description}
+                                td !{item.description}
                                 td
                                     a(
                                         href=`/${prefixAdmin}/roles/detail/${item.id}`
