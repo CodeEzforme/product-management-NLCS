@@ -50,5 +50,6 @@ mixin table-tree(items, level = 1)
                     button-delete
                     data-id=item.id
                 ) Xóa
+
         if item.children && item.children.length > 0
             +table-tree(item.children, level + 1)

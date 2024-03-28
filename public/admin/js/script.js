@@ -161,19 +161,21 @@ if(formChangeMulti) {
 }
 // Hết form-change-multi
 
-// change Status
+// Xóa sản phẩm
 const buttonsDelete = document.querySelectorAll("[button-delete]");
-if(buttonsChangeStatus.length > 0) {
+if(buttonsDelete.length > 0) {
     const formDeleteItem = document.querySelector("#form-delete-item");
     const path = formDeleteItem.getAttribute("data-path");
 
     buttonsDelete.forEach(button => {
+        console.log(button);
         button.addEventListener("click", () => {
             const confirmDelete = confirm("Bạn có chắc muốn xóa bản ghi này?");
 
             if(confirmDelete) {
-                const id = button.getAttribute("data-id");
 
+                const id = button.getAttribute("data-id");
+                console.log(id);
                 const action = path + `/${id}?_method=DELETE`;
 
                 formDeleteItem.action = action;
@@ -183,10 +185,10 @@ if(buttonsChangeStatus.length > 0) {
         });
     });
 }
-// Hết change Status
+// Hết Xóa sản phẩm
 
 // Show Alert
-const showAlert = document.querySelector("[show-alert]");   
+const showAlert = document.querySelector("[show-alert]");
 if(showAlert) {
     const time = parseInt(showAlert.getAttribute("data-time")) || 3000;
     const closeAlert = showAlert.querySelector("[close-alert]");

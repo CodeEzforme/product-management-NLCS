@@ -1,57 +1,61 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
-include ../../mixins/select-tree.pug
 
 block main
-    h1(class="mb-4") Thêm mới danh mục sản phẩm
+    h1(class="mb-4") Thêm mới tài khoản
 
-    +alert-success(5000)
     +alert-error(5000)
 
     form(
-        action=`/${prefixAdmin}/products-category/create`
+        action=`/${prefixAdmin}/accounts/create`
         method="POST"
         enctype="multipart/form-data"
     )
         div(class="form-group")
-            label(for="title") Tiêu đề
+            label(for="fullName")  Họ tên *
             input(
                 type="text"
                 class="form-control"
-                id="title"
-                name="title"
+                id="fullName"
+                name="fullName"
                 required
             )
         div(class="form-group")
-            label(for="parent_id") Danh mục cha
-            select(
-                name="parent_id"
-                id="parent_id"
+            label(for="email") Email *
+            input(
+                type="email"
                 class="form-control"
+                id="email"
+                name="email"
+                required
             )
-                option(value="") -- Chọn danh mục cha --
-                +select-tree(records)
-
         div(class="form-group")
-            label(for="desc") Mô tả
-            textarea(
+            label(for="password") Mật khẩu *
+            input(
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+            )
+        div(class="form-group")
+            label(for="phone") Số điện thoại
+            input(
                 type="text"
-                class="form-control textarea-mce"
-                id="desc"
-                name="description"
-                rows="5"
-                textarea-mce
+                class="form-control"
+                id="phone"
+                name="phone"
             )
         div(
             class="form-group"
             upload-image
         )
-            label(for="thumbnail") Ảnh
+            label(for="avatar") Avatar
             input(
                 type="file"
                 class="form-control-file"
-                id="thumbnail"
-                name="thumbnail"
+                id="avatar"
+                name="avatar"
                 accept="image/*"
                 upload-image-input
             )
@@ -60,16 +64,17 @@ block main
                 class="image-preview"
                 upload-image-preview
             )
+
         div(class="form-group")
-            label(for="position") Vị trí
-            input(
-                type="number"
+            label(for="role_id") Phân quyền
+            select(
+                name="role_id"
+                id="role_id"
                 class="form-control"
-                id="position"
-                name="position"
-                placeholder="Tự động tăng"
-                min="1"
             )
+                option(disabled) -- Chọn --
+                each item in roles
+                    option(value=item.id) #{item.title}
         div(class="form-group form-check form-check-inline")
             input(
                 type="radio"

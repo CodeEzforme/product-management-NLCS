@@ -44,8 +44,17 @@ block main
                                         class="btn btn-warning btn-sm"
                                     ) Sửa
                                     button(
+                                        button-delete
+                                        data-id=item.id
                                         class="btn btn-danger btn-sm ml-1"
                                     ) Xóa
                     else
                         tr
                             td(colspan="4" class="text-center") Chưa có nhóm quyền nào được tạo.
+
+                form(
+                    id="form-delete-item"
+                    method="POST"
+                    action=""
+                    data-path=`/${prefixAdmin}/roles/delete`
+                )
