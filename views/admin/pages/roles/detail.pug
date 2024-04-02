@@ -2,23 +2,24 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 
 block main
-    +alert-success(5000)
-    +alert-error(5000)
+    if(role.permissions.includes("roles_view"))
+        +alert-success(5000)
+        +alert-error(5000)
 
-    if (data.title)
-        h1(class="mb-4") #{data.title}
-    hr
+        if (data.title)
+            h1(class="mb-4") #{data.title}
+        hr
 
-    if (data.description)
-        div(class="mb-4")
-            h5 Các quyền :
-            i " !{data.permissions} "
+        if (data.description)
+            div(class="mb-4")
+                h5 Các quyền :
+                i " !{data.permissions} "
 
-    if (data.description)
-        div(class="mb-4") Mô tả: !{data.description}
+        if (data.description)
+            div(class="mb-4") Mô tả: !{data.description}
 
-    if (data.createdAt)
-        div(class="mb-4") Ngày tạo: #{data.createdAt}
+        if (data.createdAt)
+            div(class="mb-4") Ngày tạo: #{data.createdAt}
 
-    if (data.updatedAt)
-        div(class="mb-4") Cập nhật gần đây: #{data.updatedAt}
+        if (data.updatedAt)
+            div(class="mb-4") Cập nhật gần đây: #{data.updatedAt}

@@ -1,15 +1,38 @@
-header.header
-    .container
-        .row.align-items-center
-            .col-3
-                .inner-logo
-                    a(href="/")
-                        img(src="/images/logo1.svg", alt="Logo")
+include ../mixins/sub-menu.pug
 
-            .col-9
-                .inner-menu
-                    ul
-                        li
-                         a(href="/") Trang chủ
-                        li
-                         a(href="/products") Sản phẩm
+header.header
+  .container
+    .row.align-items-center
+      .col-3
+        .inner-logo
+          a(href="/")
+            img(src="settingGeneral.logo" , alt="Logo")
+
+      .col-9
+        .inner-menu
+          ul
+            li
+              a(href="/") Trang chủ
+            li(class="sub-menu")
+              - const pathProduct = "/products";
+              a(href=pathProduct) sản phẩm
+              if(layoutCategoryProducts)
+                +sub-menu(layoutCategoryProducts, pathProduct)
+//- header.header
+//-   .container
+//-     .row.align-items-center
+//-       .col-3
+//-         .inner-logo
+//-           a(href="/")
+//-             img(src="/public/images/logo.png" , alt="Logo")
+
+//-       .col-4
+//-         .inner-menu
+//-           ul
+//-             li
+//-               a(href="/") Trang chủ
+//-             li(class="sub-menu")
+//-               - const pathProduct = "/products";
+//-               a(href=pathProduct) sản phẩm
+//-               if(layoutCategoryProducts)
+//-                 +sub-menu(layoutCategoryProducts, pathProduct)

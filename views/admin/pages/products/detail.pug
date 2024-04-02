@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 
 block main
+  if(role.permissions.includes("products_view"))
     if(product.title)
       h1(class="mb-4") #{product.title}
 

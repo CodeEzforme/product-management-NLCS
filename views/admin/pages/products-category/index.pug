@@ -3,47 +3,49 @@ include ../../mixins/table-tree.pug
 include ../../mixins/alert
 
 block main
-    +alert-success(5000)
-    +alert-error(5000)
+    if(role.permissions.includes("products-category_view"))
+        +alert-success(5000)
+        +alert-error(5000)
 
-    h1(class="mb-4") Danh mục sản phẩm
+        h1(class="mb-4") Danh mục sản phẩm
 
-    .card.mb-3
-        .card-header Danh sách
-        .card-body
-            .row
-                .col-8
-                .col-4.text-right
-                    a(
-                        href=`/${prefixAdmin}/products-category/create`
-                        class="btn btn-outline-success"
-                    ) + Thêm mới
+        .card.mb-3
+            .card-header Danh sách
+            .card-body
+                .row
+                    .col-8
+                    .col-4.text-right
+                        if(role.permissions.includes("products-category_create"))
+                            a(
+                                href=`/${prefixAdmin}/products-category/create`
+                                class="btn btn-outline-success"
+                            ) + Thêm mới
 
-            table(
-                class="table table-hover table-sm"
-            )
-                thead
-                    tr(class="mid-pos")
-                        th STT
-                        th Hình ảnh
-                        th Tiêu đề
-                        th Vị trí
-                        th Trạng thái
-                        th Hành động
-
-                tbody
-                    +table-tree(records)
-
-                form(
-                    id="form-change-status"
-                    method="POST"
-                    action=""
-                    data-path=`/${prefixAdmin}/products-category/change-status`
+                table(
+                    class="table table-hover table-sm"
                 )
+                    thead
+                        tr(class="mid-pos")
+                            th STT
+                            th Hình ảnh
+                            th Tiêu đề
+                            th Vị trí
+                            th Trạng thái
+                            th Hành động
 
-                form(
-                    id="form-delete-item"
-                    method="POST"
-                    action=""
-                    data-path=`/${prefixAdmin}/products-category/delete`
-                )
+                    tbody
+                        +table-tree(records)
+
+                    form(
+                        id="form-change-status"
+                        method="POST"
+                        action=""
+                        data-path=`/${prefixAdmin}/products-category/change-status`
+                    )
+
+                    form(
+                        id="form-delete-item"
+                        method="POST"
+                        action=""
+                        data-path=`/${prefixAdmin}/products-category/delete`
+                    )

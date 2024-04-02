@@ -15,9 +15,9 @@ module.exports.requireAuth = async (req, res, next) => {
 
     if (!user) {
         if (req.cookies.token)
-        res.clearCookie("token");
-        res.redirect(`/${systemConfig.prefixAdmin}/auth/login`);
-        return;
+            res.clearCookie("token");
+            res.redirect(`/${systemConfig.prefixAdmin}/auth/login`);
+            return;
     }
 
     // local variables definition

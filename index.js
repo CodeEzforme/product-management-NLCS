@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser")
 const session = require("express-session");
+const moment = require("moment");
 var path = require('path');
 require('dotenv').config();
 
@@ -43,6 +44,7 @@ app.use(bodyParser.urlencoded({
 
 // biến toàn cục
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment;
 
 //routes
 routeAdmin(app);

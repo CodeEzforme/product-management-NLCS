@@ -59,6 +59,7 @@
     width: 100%;
     aspect-ratio: 4/3;
     border-bottom: 1px solid #ddd;
+    position: relative;
 }
 
 .product-item .inner-image img {
@@ -66,6 +67,18 @@
     height: 100%;
     object-fit: cover;
 }
+
+.product-item .inner-image .inner-featured {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: green;
+    color: white;
+    padding: 3px 6px;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 8px;
+  }
 
 .product-item .inner-content {
     padding: 15px;
@@ -100,5 +113,104 @@
 }
 
 /*/////////// Hết product-item //////*/
+
+/* sub-menu */
+.sub-menu {
+    position: relative;
+    z-index: 999;
+}
+
+.sub-menu ul {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #eae9e9;
+    min-width: 180px;
+    display: none;
+}
+
+.sub-menu ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sub-menu:hover > ul {
+    display: block;
+}
+
+.sub-menu ul li {
+    position: relative;
+}
+
+.sub-menu ul li ul {
+    right: 100%;
+    top: 0;
+}
+
+.sub-menu ul li:hover > ul {
+    display: block;
+}
+/* End sub-menu */
+
+/* product-detail */
+.product-detail .inner-thumb img {
+    width: 100%;
+    height: auto;
+  }
+
+  .product-detail .inner-title {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  .product-detail .inner-category {
+    margin-bottom: 10px;
+  }
+
+  .product-detail .inner-price-new {
+    color: green;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .product-detail .inner-price-old {
+    color: red;
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration: line-through;
+    margin-bottom: 10px;
+  }
+
+  .product-detail .inner-percent {
+    margin-bottom: 10px;
+  }
+
+  .product-detail .inner-percent span {
+    color: #fff;
+    background: red;
+    font-weight: 600;
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 8px;
+  }
+
+  .product-detail .inner-stock {
+    margin-bottom: 10px;
+  }
+
+  .product-detail .inner-stock span {
+    color: #fff;
+    background: green;
+    font-weight: 600;
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 8px;
+  }
+  /* End product-detail */
+
 
 /* ////////// Hết product ///////////*/
