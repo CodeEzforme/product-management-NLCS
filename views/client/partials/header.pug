@@ -6,7 +6,7 @@ header.header
       .col-3
         .inner-logo
           a(href="/")
-            img(src="settingGeneral.logo" , alt="Logo")
+            img(src="/images/nang-moi (1).jpg" , alt="Logo")
 
       .col-5
         form(
@@ -36,3 +36,21 @@ header.header
               a(href=pathProduct) sản phẩm
               if(layoutCategoryProducts)
                 +sub-menu(layoutCategoryProducts, pathProduct)
+
+            li
+              a(href='/cart') Giỏ hàng (#{miniCart && miniCart.totalQuantity ? miniCart.totalQuantity : "0"})
+            if (user)
+              li
+                a(href='/user/info') #{user.fullName}
+              li
+                a(href="/users/friends") Bạn bè
+              li
+                a(href="/rooms-chat") Phòng chat
+              li
+                a(href="/user/logout") Đăng xuất
+            else
+              li
+                a(href="/user/login") Đăng nhập
+              li
+                a(href="/user/register") Đăng ký
+

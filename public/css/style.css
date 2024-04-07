@@ -212,6 +212,17 @@
   }
   /* End product-detail */
 
+  /* Căn chỉnh cột của bản sản phẩm về giữ hàng */
+  .mid-pos {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .table td, .table th {
+    vertical-align: middle;
+  }
+  /* Hết Căn chỉnh cột của bản sản phẩm về giữ hàng */
+
   /* Show Alert */
 [show-alert] {
     position: fixed;
