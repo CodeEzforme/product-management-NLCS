@@ -27,7 +27,7 @@ module.exports.index = async (req, res) => {
     // Hiển thị danh sách nổi bật mới nhất
     const newProducts = await Product.find({
       deleted: false,
-      status: "active", 
+      status: "active",
     }).sort({ position: "desc" }).limit(6);
 
     const newProductsNew = productsHelper.productsNewPrice(newProducts)

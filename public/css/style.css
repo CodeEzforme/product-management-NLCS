@@ -23,6 +23,10 @@
 .header .inner-menu > ul > li {
     margin-left: 20px;
 }
+
+.form-group d-flex mb-0
+
+
 /*/////////// hết Header  ///////*/
 
 
@@ -53,6 +57,8 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.6s ease-in-out;
 }
 
 .product-item .inner-image {
@@ -66,6 +72,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all 0.5s ease-in-out;
 }
 
 .product-item .inner-image .inner-featured {
@@ -112,6 +119,45 @@
     border-radius: 8px;
 }
 
+.product-item .inner-image img:hover {
+  transform: scale(1.03);
+}
+.product-item:hover {
+  transform: scale(1.03);
+}
+
+.product-item .inner-content .cart-button{
+  padding: 6px 20px;
+  background: green;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 12px;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+
+  padding: 0.5rem;
+  width: 100%;
+  background-image: var(--bg-linear);
+
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(light);
+  text-wrap: nowrap;
+
+  border: 2px solid hsla(260, 6%, 91%, 0.5);
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0.25rem 1px var(light);
+}
+
+.product-item .inner-content .cart-button .cart-icon {
+  width: 1rem;
+}
 /*/////////// Hết product-item //////*/
 
 /* sub-menu */
@@ -137,9 +183,11 @@
     border-bottom: 1px solid #ddd;
 }
 
+
 .sub-menu:hover > ul {
     display: block;
 }
+
 
 .sub-menu ul li {
     position: relative;
@@ -153,6 +201,16 @@
 .sub-menu ul li:hover > ul {
     display: block;
 }
+
+.sub-menu ul li:hover > a {
+  background-color: #ebe1e1;/* Đổi màu nền khi hover */
+  color: #da1856;
+}
+
+.sub-menu ul li ul li:hover > a {
+  color: #da1856; /* Đổi màu chữ thành đỏ khi hover */
+}
+
 /* End sub-menu */
 
 /* product-detail */
@@ -210,6 +268,71 @@
     padding: 3px 6px;
     border-radius: 8px;
   }
+
+  .product-detail .Btn {
+    width: 140px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.089);
+    cursor: pointer;
+    background-color: transparent;
+  }
+
+  .product-detail .leftContainer {
+    width: 60%;
+    height: 100%;
+    background-color: rgb(238, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .product-detail .leftContainer .like {
+    color: white;
+    font-weight: 600;
+  }
+  
+  .product-detail .likeCount {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(238, 0, 0);
+    font-weight: 600;
+    position: relative;
+    background-color: white;
+  }
+  
+  .product-detail .likeCount::before {
+    height: 8px;
+    width: 8px;
+    position: absolute;
+    content: "";
+    background-color: rgb(255, 255, 255);
+    transform: rotate(45deg);
+    left: -4px;
+  }
+  
+  .product-detail .Btn:hover .leftContainer {
+    background-color: rgb(219, 0, 0);
+  }
+  
+  .product-detail .Btn:active .leftContainer {
+    background-color: rgb(201, 0, 0);
+  }
+  
+  .product-detail .Btn:active .leftContainer svg {
+    transform: scale(1.15);
+    transform-origin: top;
+  }
+
   /* End product-detail */
 
   /* Căn chỉnh cột của bản sản phẩm về giữ hàng */
@@ -262,3 +385,289 @@
 /* Hết Show alerts */
 
 /* ////////// Hết product ///////////*/
+
+/* Chat */
+.chat {
+    border: 1.5px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .chat .inner-name {
+    font-weight: 600;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-bottom: .3rem;
+  }
+
+  .chat .inner-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 450px;
+    overflow-y: auto;
+  }
+
+  .chat .inner-incoming .inner-content {
+    background: #ddd;
+    padding: .5rem 1rem;
+    color: #000;
+    border-radius: 15px;
+    max-width: 16rem;
+    width: fit-content;
+    margin-bottom: 1rem;
+  }
+
+  .chat .inner-outgoing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: .2rem;
+  }
+
+  .chat .inner-outgoing .inner-content {
+    padding: .5rem 1rem;
+    background:rgb(4, 107, 138);
+    color: #fff;
+    border-radius: 15px;
+    width: fit-content;
+    max-width: 16rem;
+  }
+
+  .chat .inner-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .chat .inner-form input {
+    flex: 1;
+    height: 32px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 0 10px;
+    outline: none;
+  }
+
+  .chat .inner-foot {
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .chat .inner-foot input {
+    padding: 1.25rem 1rem;
+    width: 85%;
+  }
+
+  .chat .inner-form .button-icon, .chat .inner-form .button-icon-img {
+    color: #6f6f6f;
+    border-radius: 15px;
+    height: 32px;
+    padding: 0 10px;
+    width: 4%;
+    padding: 1.25rem 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: all .2s;
+  }
+
+  .chat .inner-form .button-icon:hover, .chat .inner-form .button-icon-img:hover {
+    background-color: #efefef;
+  }
+
+  .chat .inner-form button {
+    margin-left: .25rem;
+    border-radius: 15px;
+    border: 1px solid rgb(4, 107, 138);
+    background:rgb(4, 107, 138);
+    color: #fff;
+    height: 32px;
+    padding: 0 10px;
+    width: 7%;
+    padding: 1.25rem 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chat .inner-body .inner-images img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background: #efefef;
+    padding: 10px;
+    margin: 0 5px 5px 0;
+    border-radius: 5px;
+  }
+
+  .chat .inner-body .inner-outgoing .inner-images {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .chat .inner-body .inner-outgoing .inner-images img {
+    margin: 0 0 5px 5px;
+  }
+
+  .chat .inner-preview-images {
+    position: relative;
+  }
+
+  .chat .inner-preview-images .label-container {
+    display: none;
+  }
+
+  .chat .inner-preview-images .input-container {
+    display: none;
+  }
+
+  .chat .inner-preview-images .image-preview {
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .chat .inner-preview-images .image-preview {
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .chat .inner-preview-images .image-preview-item {
+    width: 90px;
+    background-size: contain;
+  }
+/* End Chat */
+
+
+
+/* ///////////register */
+/* styles.css */
+
+/* Định dạng phần tử .register (cho trang register và login)*/
+/* styles.css */
+
+.user {
+  position: relative;
+  padding: 20px;
+  background-image: url('https://images.pexels.com/photos/947914/pexels-photo-947914.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover;
+  background-position: center;
+}
+
+.user::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(168, 163, 163, 0.5); /* Màu đen với độ mờ 50% */
+}
+
+.user .container {
+  position: relative;
+  background-color: #dfe091;
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1;
+}
+
+.user .container.active {
+  opacity: 1; /* Khi thêm lớp active, hiển thị form bằng cách làm cho độ mờ thành 1 */
+  transform: translateY(0); /* Di chuyển form lên vị trí ban đầu */
+}
+
+/* Khi container được hiển thị */
+.user.active .container {
+  opacity: 1;
+  transform: translateY(0); /
+}
+
+
+/* Định dạng tiêu đề */
+.user h1 {
+  width: 100% ;
+  color: #333;
+  text-align: center;
+}
+
+.user .logo-container img {
+  width: 40%; /* Độ rộng của hình ảnh */
+  height: auto; /* Chiều cao tự động điều chỉnh theo tỷ lệ */
+  display: block; /* Hiển thị hình ảnh như một khối */
+  margin: 0 auto; /* Canh giữa hình ảnh */
+  border-radius: 50%; /* Bo tròn viền */
+  border: 3px solid #fff; /* Đường viền màu trắng */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+}
+
+/* Định dạng các input và label */
+.user label,
+.user input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.user input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.user input:hover, input:focus{
+  outline: none;
+  border-color: #626481;
+}
+
+.user input-group:hover, input:focus {
+  color: #c2c5ddc2;
+}
+
+.user button {
+  cursor: pointer;
+  position: relative;
+  padding: 10px 24px;
+  font-size: 18px;
+  color: rgb(193, 163, 98);
+  border: 2px solid rgb(193, 163, 98);
+  border-radius: 34px;
+  background-color: transparent;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  overflow: hidden;
+}
+
+.user button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: inherit;
+  scale: 0;
+  z-index: -1;
+  background-color: rgb(193, 163, 98);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.user button:hover::before {
+  scale: 6.5;
+}
+
+.user button:hover {
+  color: #212121;
+  scale: 1;
+  box-shadow: 0px 0px 20px rgba(193, 163, 98,0.4);
+}
+
+.user button:active {
+  scale: 1.1;
+}
+
+

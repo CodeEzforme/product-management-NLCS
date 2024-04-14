@@ -10,9 +10,9 @@ block main
     h1(class="mb-4") Thêm mới sản phẩm
 
     form(
-    action=`/${prefixAdmin}/products/create`
-    method="POST"
-    enctype="multipart/form-data"
+      action=`/${prefixAdmin}/products/create`
+      method="POST"
+      enctype="multipart/form-data"
     )
       div(class="form-group")
         label(for="title") Tiêu đề
@@ -34,21 +34,21 @@ block main
           +select-tree(records)
       div(class="form-group form-check form-check-inline")
         input(
-            type="radio"
-            class="form-check-input"
-            id="featured1"
-            name="featured"
-            value="1"
+          type="radio"
+          class="form-check-input"
+          id="featured1"
+          name="featured"
+          value="1"
         )
         label(for="featured1" class="form-check-label") Nổi bật
       div(class="form-group form-check form-check-inline")
         input(
-            type="radio"
-            class="form-check-input"
-            id="featured0"
-            name="featured"
-            value="0"
-            checked
+          type="radio"
+          class="form-check-input"
+          id="featured0"
+          name="featured"
+          value="0"
+          checked
         )
         label(for="featured0" class="form-check-label") Không
       div(class="form-group")
@@ -89,9 +89,11 @@ block main
           value="0"
           min="0"
         )
+
+      //- upload nhiều ảnh
       div(
         class="form-group"
-        upload-image
+        upload-images
       )
         label(for="thumbnail") Ảnh
         input(
@@ -100,13 +102,28 @@ block main
           id="thumbnail"
           name="thumbnail"
           accept="image/*"
-          upload-image-input
+          upload-images-input
+          multiple
         )
-        img(
-          src=""
-          class="image-preview"
-          upload-image-preview
+        div(
+          upload-images-preview
         )
+      //- Het upload nhieu anh
+      div(
+        class="form-group"
+        upload-audio
+      )
+        label(for="audio") File âm thanh
+        input(
+          type="file"
+          class="form-control-file"
+          id="audio"
+          name="audio"
+          accept="audio/*"
+          upload-audio-input
+        )
+        audio(controls upload-audio-play)
+          source(src="")
       div(class="form-group")
         label(for="position") Vị trí
         input(

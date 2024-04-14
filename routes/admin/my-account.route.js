@@ -16,8 +16,16 @@ router.patch(
   '/edit',
   upload.single("avatar"),
   uploadCloud.upload,
-//   validate.updatePatch, 
+  // validate.updatePatch,
   controller.editPatch
 );
+// router.patch(
+//   '/edit',
+//   upload.single("avatar"),
+//   // validate.updatePatch,
+//   controller.editPatch
+// );
+
+
 
 module.exports = router;

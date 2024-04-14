@@ -16,11 +16,11 @@ block main
 
     if (product.thumbnail)
       div(class="mb-4")
-        img(
-          src=product.thumbnail
-          style="width: 100px"
-        )
-
+        each image,index in product.thumbnail
+          img(
+            src=product.thumbnail[index]
+            style="width: 100px"
+          )
     if (product.status)
       div(class="mb-4")
         span Trạng thái:

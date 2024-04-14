@@ -70,24 +70,24 @@ module.exports.registerPost = async (req, res, next) => {
     next();
   };
 
-//   module.exports.resetPasswordPost = async (req, res, next) => {
-//     if (!req.body.password) {
-//       req.flash('error', "Password must not be empty");
-//       res.redirect('back');
-//       return;
-//     }
+  module.exports.resetPasswordPost = async (req, res, next) => {
+    if (!req.body.password) {
+      req.flash('error', "Mật khẩu không được để trống");
+      res.redirect('back');
+      return;
+    }
 
-//     if (!req.body.confirmPassword) {
-//       req.flash('error', "Please confirm your password!");
-//       res.redirect('back');
-//       return;
-//     }
+    if (!req.body.confirmPassword) {
+      req.flash('error', "Vui lòng nhập lại mật khẩu!");
+      res.redirect('back');
+      return;
+    }
 
-//     if (req.body.confirmPassword != req.body.password) {
-//       req.flash('error', "Password confirm does not match, please try again");
-//       res.redirect('back');
-//       return;
-//     }
+    if (req.body.confirmPassword != req.body.password) {
+      req.flash('error', "Xác nhận mật khẩu không trùng khớp!");
+      res.redirect('back');
+      return;
+    }
 
-//     next();
-//   };
+    next();
+  };

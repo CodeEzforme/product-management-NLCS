@@ -1,11 +1,19 @@
 extends ../../layouts/default
 include ../../mixins/box-head
-include ../../../client/mixins/product-layout.pug
+include ../../mixins/alert.pug
+include ../../mixins/product-layout.pug
+include ../../mixins/pagination
 
 block main
-    .container.my-3
-        .row
-            .col-12
-                +box-head(pageTitle)
+  +alert-success(3000)
+  +alert-error(3000)
+  .container.my-3
+    .row
+      .col-12
+        +box-head(pageTitle)
 
-        +product-grid(products)
+    +product-grid(products)
+
+    .row
+      .col-6
+      +pagination(pagination)

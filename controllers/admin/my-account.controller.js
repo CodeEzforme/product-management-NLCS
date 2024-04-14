@@ -46,7 +46,7 @@ module.exports.editPatch = async (req, res) => {
 
     await Account.updateOne({ _id: res.locals.user.id }, req.body)
 
-    req.flash("success", "Thông tin tài khoản đã được cập nhật thành công !");
+    req.flash("success", "Thông tin tài khoản đã được cập nhật thành công!");
     res.redirect('back')
 
   } catch (error) {

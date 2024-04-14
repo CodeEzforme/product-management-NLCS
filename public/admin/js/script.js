@@ -1,13 +1,13 @@
 // button-status
 const buttonStatus = document.querySelectorAll("[button-status]");
-if(buttonStatus.length > 0) {
+if (buttonStatus.length > 0) {
     let url = new URL(window.location.href);
 
     buttonStatus.forEach(button => {
         button.addEventListener("click", () => {
             const status = button.getAttribute("button-status");
 
-            if(status != "") {
+            if (status != "") {
                 url.searchParams.set("status", status);
             } else {
                 url.searchParams.delete("status");
@@ -20,14 +20,13 @@ if(buttonStatus.length > 0) {
 
 // form search
 const formSearch = document.querySelector("#form-search");
-if(formSearch) {
+if (formSearch) {
     let url = new URL(window.location.href);
 
     formSearch.addEventListener("submit", (e) => {
         e.preventDefault();
-        console.log(e);
         const value = e.target.elements.keyword.value;
-        if(value != "") {
+        if (value != "") {
             url.searchParams.set("keyword", value);
             url.searchParams.set("page", 1);
         } else {
@@ -41,7 +40,7 @@ if(formSearch) {
 
 // Pagination
 const buttonsPagination = document.querySelectorAll("[button-pagination]");
-if(buttonsPagination.length > 0) {
+if (buttonsPagination.length > 0) {
     let url = new URL(window.location.href);
 
     buttonsPagination.forEach(button => {
@@ -58,7 +57,7 @@ if(buttonsPagination.length > 0) {
 
 // change Status
 const buttonsChangeStatus = document.querySelectorAll("[button-change-status]");
-if(buttonsChangeStatus.length > 0) {
+if (buttonsChangeStatus.length > 0) {
     const formChangeStatus = document.querySelector("#form-change-status");
     const path = formChangeStatus.getAttribute("data-path");
 
@@ -67,14 +66,13 @@ if(buttonsChangeStatus.length > 0) {
             const statusCurrent = button.getAttribute("data-status");
             const id = button.getAttribute("data-id");
 
-            const statusChange  = statusCurrent == "active" ? "inactive" : "active";
+            const statusChange = statusCurrent == "active" ? "inactive" : "active";
 
             const action = path + `/${statusChange}/${id}?_method=PATCH`;
 
             formChangeStatus.action = action;
 
             formChangeStatus.submit();
-
 
         });
     });
@@ -83,12 +81,12 @@ if(buttonsChangeStatus.length > 0) {
 
 // checkbox Multi
 const checkboxMulti = document.querySelector("[checkbox-multi]");
-if(checkboxMulti) {
+if (checkboxMulti) {
     const inputCheckAll = checkboxMulti.querySelector("input[name='checkall']");
     const inputsId = checkboxMulti.querySelectorAll("input[name='id']");
 
     inputCheckAll.addEventListener("click", () => {
-        if(inputCheckAll.checked == true) {
+        if (inputCheckAll.checked == true) {
             inputsId.forEach(input => {
                 input.checked = true;
             });
@@ -105,7 +103,7 @@ if(checkboxMulti) {
                 "input[name='id']:checked"
             ).length;
 
-            if(countChecked == inputsId.length) {
+            if (countChecked == inputsId.length) {
                 inputCheckAll.checked = true;
             } else {
                 inputCheckAll.checked = false;
@@ -117,7 +115,7 @@ if(checkboxMulti) {
 
 // form-change-multi
 const formChangeMulti = document.querySelector("[form-change-multi]");
-if(formChangeMulti) {
+if (formChangeMulti) {
     formChangeMulti.addEventListener("submit", (e) => {
         e.preventDefault();
         const checkboxMulti = document.querySelector("[checkbox-multi]");
@@ -127,22 +125,22 @@ if(formChangeMulti) {
 
         const typeChange = e.target.elements.type.value;
 
-        if(typeChange == "delete-all") {
+        if (typeChange == "delete-all") {
             const isConfirm = confirm("Bạn có chắc muốn xóa những bản ghi này?");
 
-            if(!isConfirm) {
+            if (!isConfirm) {
                 return;
             }
         }
 
-        if(inputsChecked.length > 0) {
+        if (inputsChecked.length > 0) {
             let ids = [];
             const inputIds = formChangeMulti.querySelector("input[name='ids']");
 
             inputsChecked.forEach(input => {
                 const id = input.value;
 
-                if(typeChange == "change-position") {
+                if (typeChange == "change-position") {
                     const position = input.closest("tr").querySelector("input[name='position']").value;
 
                     ids.push(`${id}-${position}`);
@@ -163,16 +161,15 @@ if(formChangeMulti) {
 
 // Xóa sản phẩm
 const buttonsDelete = document.querySelectorAll("[button-delete]");
-if(buttonsDelete.length > 0) {
+if (buttonsDelete.length > 0) {
     const formDeleteItem = document.querySelector("#form-delete-item");
     const path = formDeleteItem.getAttribute("data-path");
 
     buttonsDelete.forEach(button => {
-        console.log(button);
         button.addEventListener("click", () => {
             const confirmDelete = confirm("Bạn có chắc muốn xóa bản ghi này?");
 
-            if(confirmDelete) {
+            if (confirmDelete) {
 
                 const id = button.getAttribute("data-id");
                 console.log(id);
@@ -189,7 +186,7 @@ if(buttonsDelete.length > 0) {
 
 // Show Alert
 const showAlert = document.querySelector("[show-alert]");
-if(showAlert) {
+if (showAlert) {
     const time = parseInt(showAlert.getAttribute("data-time")) || 3000;
     const closeAlert = showAlert.querySelector("[close-alert]");
 
@@ -203,29 +200,80 @@ if(showAlert) {
 }
 // Hết Show Alert
 
+
+// FileUploadWithPreview
+// const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-image', {
+//     multiple: true,
+//     maxFileCount: 8
+// });
+// const uploadImageInput = document.querySelector("[upload-image-input]");
+
+// Hêt FileUploadWithPreview
+
+// console.log(upload);
+
+
+
+// Upload nhiều ảnh
+const uploadImages = document.querySelector("[upload-images]");
+if (uploadImages) {
+    const uploadImageInput = uploadImages.querySelector("[upload-images-input]");
+    const uploadImagePreview = uploadImages.querySelector("[upload-images-preview]");
+    uploadImageInput.addEventListener("change", (e) => {
+        if (e.target.files.length) {
+            // uploadImagePreview.innerHTML = '';
+            const file = e.target.files
+            for (let i = 0; i < e.target.files.length; i++) {
+                const imageURL = URL.createObjectURL(file[i]);
+                const imgElement = document.createElement('img');
+                imgElement.src = imageURL;
+                imgElement.className = 'image-preview';
+                uploadImagePreview.appendChild(imgElement);
+            }
+        }
+    })
+};
+// Hết upload nhiều ảnh
+
+
+// Upload Audio
+const uploadAudio = document.querySelector("[upload-audio]");
+if (uploadAudio) {
+    const uploadAudioInput = uploadAudio.querySelector("[upload-audio-input]");
+    const uploadAudioPlay = uploadAudio.querySelector("[upload-audio-play]");
+    uploadAudioInput.addEventListener("change", (e) => {
+        if (e.target.files.length) {
+            const audio = URL.createObjectURL(e.target.files[0]);
+            uploadAudioPlay.src = audio;
+        }
+    })
+};
+// Hết upload Audio
+
+
+
 // Upload ảnh
 const uploadImage = document.querySelector("[upload-image]");
-if(uploadImage) {
+if (uploadImage) {
     const uploadImageInput = uploadImage.querySelector("[upload-image-input]");
     const uploadImagePreview = uploadImage.querySelector("[upload-image-preview]");
 
     uploadImageInput.addEventListener("change", (e) => {
-        if(e.target.files.length){
+        if (e.target.files.length) {
             const image = URL.createObjectURL(e.target.files[0]);
-
             uploadImagePreview.src = image;
         }
-    });
-}
+    })
+};
 // Hết upload ảnh
 
 // Sort
 const sort = document.querySelector("[sort]");
-    if(sort) {
+if (sort) {
     let url = new URL(window.location.href);
 
-    const sortSelect =sort.querySelector("[sort-select]");
-    const sortClear =sort.querySelector("[sort-clear]");
+    const sortSelect = sort.querySelector("[sort-select]");
+    const sortClear = sort.querySelector("[sort-clear]");
 
     sortSelect.addEventListener("change", (e) => {
         const value = e.target.value;
@@ -252,12 +300,10 @@ const sort = document.querySelector("[sort]");
     const sortKey = url.searchParams.get("sortKey");
     const sortValue = url.searchParams.get("sortValue");
 
-    if(sortKey && sortValue) {
+    if (sortKey && sortValue) {
         const stringSort = `${sortKey}-${sortValue}`;
         const optionSelected = sortSelect.querySelector(`option[value='${stringSort}']`);
         optionSelected.selected = true;
     }
 }
-
-
 // Hết Sort

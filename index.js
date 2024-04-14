@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session");
 const moment = require("moment");
 var path = require('path');
+// const http = require("http");
+// const { Server } = require("socket.io");
 require('dotenv').config();
 
 const database = require("./config/database");
@@ -21,6 +23,9 @@ const port = process.env.PORT;
 
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
+
+// // Socket.io
+// const io = new Server(server);
 
 // Flash
 app.use(cookieParser("LGASGFSAADSJFD"));
@@ -45,11 +50,17 @@ app.use(bodyParser.urlencoded({
 // biến toàn cục
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.locals.moment = moment;
+// Hết biến toàn cục
 
 //routes
 routeAdmin(app);
 route(app);
 
+app.get('*', (req, res) => {
+    res.render('client/pages/errors/404', {
+      pageTitle: '404 Not Found'
+    })
+})
 
 
 app.listen(port, () => {

@@ -1,8 +1,24 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
+include ../../mixins/alert.pug
 
-block main 
-  .container.my-3  
+block main
+  .container.my-3
     .row
-      .col-12 
+      .col-12
         +box-head('Thông tin cá nhân')
+        +alert-success(4000)
+        +alert-error(4000)
+        if (user.fullName)
+          p Họ tên: <b>#{user.fullName}</b>
+
+        if (user.email)
+          p Email: <b>#{user.email}</b>
+
+        if (user.phone)
+          p Số điện thoại: <b>#{user.phone}</b>
+
+        a(
+            href=`../user/edit`
+            class="btn btn-primary"
+          ) Chỉnh sữa thông tin

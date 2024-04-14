@@ -1,13 +1,36 @@
 mixin product-item(product)
-    .col-4.mb-3
-        .product-item
-            .inner-image
-                img(src=product.thumbnail, alt=product.title)
-                if(product.featured == "1")
-                    .inner-featured Nổi bật
-            .inner-content
-                h3.inner-title
-                    a(href=`/products/detail/${product.slug}`)  #{product.title}
-                .inner-price-new #{product.newPrice}$
-                .inner-price-old #{product.price}$
-                .inner-discount -#{product.discountPercentage}%
+  .col-4.mb-3
+    .product-item
+      .inner-image
+        img(src=product.thumbnail, alt=product.title)
+        if(product.featured == "1")
+          .inner-featured Nổi bật
+      .inner-content
+        h3.inner-title
+          a(href=`/products/detail/${product.slug}` style="text-decoration: none")  #{product.title}
+
+        div(class="container")
+          div(class="row")
+            div(class="col")
+              .inner-price-new #{product.newPrice}$
+            div(class="col")
+              .inner-price-old #{product.price}$
+
+          div(class="row")
+            div(class="col-md-3") 
+              .inner-discount -#{product.discountPercentage}%
+            
+        a(class="cart-button" href=`/products/detail/${product.slug}` style="text-decoration: none")
+          svg(
+            class="cart-icon"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            fill="none")
+              path(
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+              )
+          span Đặt hàng
+

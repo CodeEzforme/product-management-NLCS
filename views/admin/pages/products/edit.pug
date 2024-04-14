@@ -91,9 +91,27 @@ block main
                     value=product.stock
                     min="0"
                 )
+            //- div(
+            //-     class="form-group"
+            //-     upload-image
+            //- )
+            //-     label(for="thumbnail") Ảnh
+            //-     input(
+            //-         type="file"
+            //-         class="form-control-file"
+            //-         id="thumbnail"
+            //-         name="thumbnail"
+            //-         accept="image/*"
+            //-         upload-image-input
+            //-     )
+            //-     img(
+            //-         src=product.thumbnail
+            //-         class="image-preview"
+            //-         upload-image-preview
+            //-     )
             div(
                 class="form-group"
-                upload-image
+                upload-images
             )
                 label(for="thumbnail") Ảnh
                 input(
@@ -102,12 +120,11 @@ block main
                     id="thumbnail"
                     name="thumbnail"
                     accept="image/*"
-                    upload-image-input
+                    upload-images-input
+                    multiple
                 )
-                img(
-                    src=product.thumbnail
-                    class="image-preview"
-                    upload-image-preview
+                div(
+                    upload-images-preview
                 )
             div(class="form-group")
                 label(for="position") Vị trí

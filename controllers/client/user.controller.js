@@ -9,7 +9,7 @@ const generateHelper = require('../../helpers/generate');
 const {
     response
 } = require('express');
-// const sendMailHelper = require('../../helpers/sendMail');
+const sendMailHelper = require('../../helpers/sendMail');
 
 // [GET] /user/register
 module.exports.register = async (req, res) => {
@@ -87,19 +87,19 @@ module.exports.otpPassword = async (req, res) => {
     }
 }
 
-// // [GET] /user/password/reset
-// module.exports.resetPassword = async (req, res) => {
-//   try {
-//     res.render('client/pages/user/reset-password', {
-//       pageTitle: "Reset Password"
-//     })
+// [GET] /user/password/reset
+module.exports.resetPassword = async (req, res) => {
+    try {
+        res.render('client/pages/user/reset-password', {
+            pageTitle: "Reset Password"
+        })
 
-//   } catch (error) {
-//     console.log('Error occurred:', error);
-//     req.flash('error', 'Page is not exists, redirected to previous page');
-//     res.redirect("back");
-//   }
-// }
+    } catch (error) {
+        console.log('Error occurred:', error);
+        req.flash('error', 'Page is not exists, redirected to previous page');
+        res.redirect("back");
+    }
+}
 
 // [GET] /user/info
 module.exports.userInfo = async (req, res) => {
@@ -112,6 +112,51 @@ module.exports.userInfo = async (req, res) => {
         console.log('Error occurred:', error);
         req.flash('error', 'Page is not exists, redirected to previous page');
         res.redirect("back");
+    }
+}
+
+// [GET] /user/edit
+module.exports.edit = async (req, res) => {
+    try {
+        res.render("client/pages/user/edit", {
+            pageTitle: 'Chỉnh sửa thông tin cá nhân'
+        });
+    } catch (error) {
+        console.log("ERROR OCCURRED:", error);
+        req.flash("error", "Error occured, page is not exists");
+        res.redirect('back');
+    }
+}
+
+// [PATCH] /admin/user/edit////// lỗi req.body.password đã bị ẩn ròi do đụng độ các middllewe hoặc 
+module.exports.editPatch = async (req, res) => {
+    try {
+        if (req.body.password) {
+            req.body.password = md5(req.body.password);
+        } else {
+            delete req.body.password;
+        }
+
+        const tokenUser = req.cookies.tokenUser;
+        console.log(tokenUser);
+        await Users.updateOne({
+            tokenUser: tokenUser
+        }, {
+            password: req.body.password
+        })
+
+        // await Users.updateOne({
+        //     _id: res.locals.user.id,
+        //     password: req.body.password
+        // }, req.body)
+
+        req.flash("success", "Thông tin tài khoản đã được cập nhật thành công!");
+        res.redirect('back')
+
+    } catch (error) {
+        console.log("ERROR OCCURRED:", error);
+        req.flash("error", "Error occured, can not update account information");
+        res.redirect('back');
     }
 }
 
@@ -216,7 +261,7 @@ module.exports.forgotPasswordPost = async (req, res) => {
         })
 
         if (!emailExisted) {
-            req.flash('error', 'Email is not existed. Please try again');
+            req.flash('error', 'Email chưa được đăng ký! vui lòng nhập lại!');
             res.redirect('back');
             return;
         }
@@ -233,14 +278,14 @@ module.exports.forgotPasswordPost = async (req, res) => {
         const forgotPassword = new ForgotPassword(forgotPasswordObj);
         await forgotPassword.save();
 
-        // // Send OTP code to gmail of user
-        // const subject = 'OTP verification code for retriving password'
-        // const content = `
-        //   <p>Your OTP verification code is <b>${otp}</b></p>
-        //   <p>OTP code expires in 2 minutes, do not share the code.</p>
-        // `
+        // Gửi OTP đến email người dùng
+        const subject = 'Mã OTP xác minh lấy lại mật khẩu'
+        const content = `
+          <p> Mã OTP xác minh lấy lại mật khẩu là <b>${otp}</b></p>
+          <p> OTP có thời gian sử dụng 3 phút! Lưu ý không được để lộ mã OTP.</p>
+        `
 
-        // sendMailHelper.sendMail(email, subject, content);
+        sendMailHelper.sendMail(email, subject, content);
 
         res.redirect(`/user/password/otp?email=${email}`)
     } catch (error) {
@@ -281,23 +326,23 @@ module.exports.otpPasswordPost = async (req, res) => {
     }
 }
 
-// // [POST] /user/password/reset
-// module.exports.resetPasswordPost = async (req, res) => {
-//   try {
-//     const tokenUser = req.cookies.tokenUser;
+// [POST] /user/password/reset
+module.exports.resetPasswordPost = async (req, res) => {
+    try {
+        const tokenUser = req.cookies.tokenUser;
 
-//     await Users.updateOne({
-//       tokenUser: tokenUser
-//     }, {
-//       password: md5(req.body.password)
-//     })
+        await Users.updateOne({
+            tokenUser: tokenUser
+        }, {
+            password: md5(req.body.password)
+        })
 
-//     req.flash('Password changed successfully, welcome to home page !')
-//     res.redirect('/');
+        req.flash("success", 'Thay đổi mật khẩu thành công!')
+        res.redirect('/');
 
-//   } catch (error) {
-//     console.log('Error occurred:', error);
-//     req.flash('error', 'Error occurred, redirected to previous page');
-//     res.redirect("back");
-//   }
-// }
+    } catch (error) {
+        console.log('Error occurred:', error);
+        req.flash('error', 'Error occurred, redirected to previous page');
+        res.redirect("back");
+    }
+}

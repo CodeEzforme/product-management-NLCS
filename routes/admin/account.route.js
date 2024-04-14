@@ -13,6 +13,7 @@ router.get("/", controller.index);
 router.get("/create", controller.create);
 
 router.post("/create", upload.single("avatar"), uploadCloud.upload, controller.createPost);
+// router.post("/create", upload.single("avatar"), controller.createPost);
 
 router.get("/edit/:id", controller.edit);
 
@@ -22,5 +23,10 @@ router.patch(
     uploadCloud.upload,
     controller.editPatch
   );
+// router.patch(
+//   '/edit/:id',
+//   upload.single("avatar"),
+//   controller.editPatch
+// );
 
 module.exports = router;

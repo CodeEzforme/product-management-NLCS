@@ -2,7 +2,7 @@ const Cart = require("../../models/cart.model");
 const Product = require("../../models/product.model");
 
 const ProductsHelper = require("../../helpers/product");
-// const { response } = require("express");
+const { response } = require("express");
 
 // [GET] /client/cart
 module.exports.index = async (req, res) => {
@@ -75,14 +75,13 @@ module.exports.addPost = async (req, res) => {
         const cartId = req.cookies.cartId;
         const quantityAdd = parseInt(req.body.quantity);
 
-
+        console.log(cartId);
         const cart = await Cart.findOne({
             _id: cartId
-        });
+        })
 
         // Check if product existed in cart
         const productExisted = cart.products.find(product => product.product_id == productId);
-
         if (productExisted) {
             const newQuantity = productExisted.quantity + quantityAdd;
 

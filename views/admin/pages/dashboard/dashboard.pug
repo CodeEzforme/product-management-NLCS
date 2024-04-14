@@ -1,0 +1,71 @@
+
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+  h1 Trang tổng quan
+
+  .row.mt-4
+    .col-12
+      .card.mb-4
+        .card-header Thông tin tài khoản
+        .card-body
+          if(user.avatar)
+            img(
+              src=user.avatar
+              style='height: auto; margin-bottom: 15px; width: 100px'
+            )
+          if(user.fullName)
+            p Họ Tên: <b>#{user.fullName}</b>
+          if(user.email)
+            p Email: <b>#{user.email}</b>
+          if(user.phone)
+            p Số điện thoại: <b>#{user.phone}</b>
+          if(role.title)
+            p Phân quyền: <b>#{role.title}</b>
+
+          p Chi tiết các quyền:
+          if role.permissions.length > 0
+            ul(
+              class='role-list'
+            )
+              each permission in role.permissions
+                li #{permission}
+          else
+            div(class='mt-20')
+              h4 Tài khoản không có quyền quản trị nào trong trang web
+              i Liên hệ
+              strong admin
+              i  Thêm các quyền cho tài khoản của bạn
+
+    .col-6
+      .card.mb-4
+        .card-header Dạnh mục sản phẩm
+        .card-body
+          p Số lượng: <b>#{statistics.productCategories.total}</b>
+          p Active <b>#{statistics.productCategories.active}</b>
+          p Inactive <b>#{statistics.productCategories.inactive}</b>
+
+    .col-6
+      .card.mb-4
+        .card-header Sản phẩm
+        .card-body
+          p Số lượng: <b>#{statistics.products.total}</b>
+          p Hoạt động: <b>#{statistics.products.active}</b>
+          p Dừng hoạt động: <b>#{statistics.products.inactive}</b>
+
+    .col-6
+      .card.mb-4
+        .card-header Tài khoản Admin
+        .card-body
+          p Số lượng: <b>#{statistics.adminAccounts.total}</b>
+          p Hoạt động: <b>#{statistics.adminAccounts.active}</b>
+          p Dừng hoạt động: <b>#{statistics.adminAccounts.inactive}</b>
+
+    .col-6
+      .card.mb-4
+        .card-header Tài khoản Client
+        .card-body
+          p Số lượng: <b>#{statistics.clientAccounts.total}</b>
+          p Hoạt động: <b>#{statistics.clientAccounts.active}</b>
+          p Dừng hoạt động: <b>#{statistics.clientAccounts.inactive}</b>
