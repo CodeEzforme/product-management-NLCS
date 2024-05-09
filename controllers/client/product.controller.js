@@ -47,11 +47,16 @@ module.exports.index = async (req, res) => {
 
   const products = await Product.find(find)
     .sort(sort)
-    .limit(objectPagination.limitItem)
+    .limit(objectPagination.limitItems)
     .skip(objectPagination.skip);
   /// pagination////////////////////////////////
 
+  console.log(products);
+  console.log(objectPagination.limitItems)
+  console.log(objectPagination.skip)
+
   const newProducts = productsHelper.productsNewPrice(products);
+
 
   res.render("client/pages/products/index", {
     pageTitle: "Danh sách sản phẩm",

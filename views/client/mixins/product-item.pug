@@ -2,7 +2,7 @@ mixin product-item(product)
   .col-4.mb-3
     .product-item
       .inner-image
-        img(src=product.thumbnail, alt=product.title)
+        img(src=product.thumbnail[0], alt=product.title)
         if(product.featured == "1")
           .inner-featured Nổi bật
       .inner-content
@@ -17,9 +17,8 @@ mixin product-item(product)
               .inner-price-old #{product.price}$
 
           div(class="row")
-            div(class="col-md-3") 
+            div(class="col-md-3")
               .inner-discount -#{product.discountPercentage}%
-            
         a(class="cart-button" href=`/products/detail/${product.slug}` style="text-decoration: none")
           svg(
             class="cart-icon"

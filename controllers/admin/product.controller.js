@@ -51,7 +51,7 @@ module.exports.index = async (req, res) => {
         .sort(sort)
         .limit(objectPagination.limitItems)
         .skip(objectPagination.skip);
-
+    console.log(products)
 
     for (const product of products) {
         // lấy ra người tạo
