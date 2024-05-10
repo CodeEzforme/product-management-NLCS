@@ -9,7 +9,7 @@
 .header .inner-logo img {
     max-height: 50px;
     max-width: 100%;
-    border-radius: 45%;
+    border-radius: 50%;
 }
 
 .header .inner-menu > ul {
@@ -34,6 +34,12 @@
 
 
 /*/////////// Footer ////////////*/
+/* .footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+} */
 footer {
   margin-top: 30px;
   padding-top: 30px;
@@ -52,7 +58,6 @@ footer {
   display: block;
   unicode-bidi: isolate;
 }
-
 /*/////////// Hết Footer ////////*/
 
 /* //////////product ////////////*/
@@ -173,6 +178,8 @@ footer {
 .product-item .inner-content .cart-button .cart-icon {
   width: 1rem;
 }
+
+/* .cart */
 /*/////////// Hết product-item //////*/
 
 /* sub-menu */
@@ -324,7 +331,7 @@ footer {
     position: relative;
     background-color: white;
   }
-  
+
   .product-detail .likeCount::before {
     height: 8px;
     width: 8px;
@@ -334,15 +341,15 @@ footer {
     transform: rotate(45deg);
     left: -4px;
   }
-  
+
   .product-detail .Btn:hover .leftContainer {
     background-color: rgb(219, 0, 0);
   }
-  
+
   .product-detail .Btn:active .leftContainer {
     background-color: rgb(201, 0, 0);
   }
-  
+
   .product-detail .Btn:active .leftContainer svg {
     transform: scale(1.15);
     transform-origin: top;
