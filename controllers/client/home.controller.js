@@ -28,17 +28,19 @@ module.exports.index = async (req, res) => {
     const newProducts = await Product.find({
       deleted: false,
       status: "active",
-    }).sort({ position: "desc" }).limit(6);
+    }).sort({
+      position: "desc"
+    }).limit(6);
 
     const newProductsNew = productsHelper.productsNewPrice(newProducts)
     // Hết hiển thị danh sách nổi bật mới nhất
 
     // console.log(newCategoryProducts);
     res.render("client/pages/home/index", {
-      pageTitle: 'Trang chủ',
-        featuredProducts: newFeaturedProducts,
-        // layoutCategoryProducts: newCategoryProducts
-        newProducts: newProductsNew
+      pageTitle: 'Luxury flowers',
+      featuredProducts: newFeaturedProducts,
+      // layoutCategoryProducts: newCategoryProducts
+      newProducts: newProductsNew
     })
 
   } catch (error) {

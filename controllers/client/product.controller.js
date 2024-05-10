@@ -29,7 +29,7 @@ module.exports.index = async (req, res) => {
   // Pagination
   let initPagination = {
     currentPage: 1,
-    limitItems: 8
+    limitItems: 9
   };
   const countProducts = await Product.countDocuments(find);
   const objectPagination = paginationHelper(req.query, countProducts, initPagination);
@@ -50,10 +50,6 @@ module.exports.index = async (req, res) => {
     .limit(objectPagination.limitItems)
     .skip(objectPagination.skip);
   /// pagination////////////////////////////////
-
-  console.log(products);
-  console.log(objectPagination.limitItems)
-  console.log(objectPagination.skip)
 
   const newProducts = productsHelper.productsNewPrice(products);
 

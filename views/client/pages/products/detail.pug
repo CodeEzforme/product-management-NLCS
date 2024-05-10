@@ -4,61 +4,78 @@ include ../../mixins/alert.pug
 
 block main
 
-    +alert-success(2000)
-    +alert-error(2000)
+  +alert-success(2000)
+  +alert-error(2000)
 
-    .product-detail
-        .container.my-5
-            .row
-                .col-6
-                    .inner-thumb
-                        img(src=product.thumbnail, alt=product.title)
-                .col-6
-                    h1(class="inner-title") #{product.title}
+  .product-detail
+    .container.my-5
+      .row
+        .col-6
+          //- .inner-thumb
+          //-     img(src=product.thumbnail[0], alt=product.title)
+          each image,index in product.thumbnail
+            if (product.thumbnail.length < 2)
+              img(
+                src=product.thumbnail[index]
+                style="width: 60%; margin-left: 20%;"
+              )
 
-                    if (product.category)
-                        div(class="inner-category")
-                            span Danh mục:
-                            a(href=`/products/${product.category.slug}`) #{product.category.title}
+            if (product.thumbnail.length >= 2 && product.thumbnail.length < 4)
+              img(
+                src=product.thumbnail[index]
+                style="width: 200px"
+              )
+            if (product.thumbnail.length >= 4)
+              img(
+                src=product.thumbnail[index]
+                style="width: 150px"
+              )
+        .col-6
+          h1(class="inner-title") #{product.title}
 
-                    if (product.newPrice)
-                        div(class="inner-price-new") #{product.newPrice}$
+          if (product.category)
+            div(class="inner-category")
+              span Danh mục:
+              a(href=`/products/${product.category.slug}`) #{product.category.title}
 
-                    if (product.price)
-                        div(class="inner-price-old") #{product.price}$
-                    if (product.discountPercentage)
-                        div(class="inner-percent") Giảm tới <span>#{product.discountPercentage}%</span>
+          if (product.newPrice)
+            div(class="inner-price-new") #{product.newPrice}$
 
-                    button(class="Btn")
-                        span(class="leftContainer")
-                            svg(fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg")
-                                path(d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z")
-                            span(class="like") Like
-                        span(class="likeCount") 2k
-                    if (product.stock)
-                        div(class="inner-stock") Còn lại: <span>#{product.stock}</span> Sản phẩm
+          if (product.price)
+            div(class="inner-price-old") #{product.price}$
+          if (product.discountPercentage)
+            div(class="inner-percent") Giảm tới <span>#{product.discountPercentage}%</span>
 
-                    form(
-                        action=`/cart/add/${product.id}`
-                        method="POST"
-                    )
-                        input(
-                            class="form-control mb-2"
-                            type="number"
-                            name="quantity"
-                            value="1"
-                            min="1"
-                            max=product.stock
-                        )
-                        button(
-                            type="submit"
-                            class="btn btn-success btn-block"
-                        ) Thêm vào giỏ hàng
+          button(class="Btn")
+            span(class="leftContainer")
+              svg(fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg")
+                path(d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z")
+              span(class="like") Like
+            span(class="likeCount") 2k
+          if (product.stock)
+            div(class="inner-stock") Còn lại: <span>#{product.stock}</span> Sản phẩm
 
-        hr
+          form(
+            action=`/cart/add/${product.id}`
+            method="POST"
+          )
+            input(
+              class="form-control mb-2"
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              max=product.stock
+            )
+            button(
+              type="submit"
+              class="btn btn-success btn-block"
+            ) Thêm vào giỏ hàng
 
-        .container.my-5
-            .row
-                .col-12
-                    +box-head("Mô tả sản phẩm")
-                    .inner-desc !{product.description}
+    hr
+
+    .container.my-5
+      .row
+        .col-12
+          +box-head("Mô tả sản phẩm")
+          .inner-desc !{product.description}
