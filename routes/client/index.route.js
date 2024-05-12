@@ -6,7 +6,7 @@ const checkoutRoutes = require("./checkout.route")
 const userRoutes = require("./user.route")
 // const chatRoutes = require("./chat.route")
 // const usersRoutes = require("./users.route")
-// const roomChatRoutes = require("./roomchat.route")
+const roomChatRoutes = require("./roomchat.route")
 
 const categoryMiddleware = require("../../middlewares/client/category.middleware");
 const cartMiddleware = require("../../middlewares/client/cart.middleware");
@@ -39,5 +39,5 @@ module.exports = (app) => {
 
   // app.use("/users", authMiddleware.authRequire, usersRoutes);
 
-  // app.use("/rooms-chat", authMiddleware.authRequire, roomChatRoutes);
+  app.use("/rooms-chat", authMiddleware.authRequire, roomChatRoutes);
 }

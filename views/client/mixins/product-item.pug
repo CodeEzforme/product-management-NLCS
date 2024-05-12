@@ -2,7 +2,8 @@ mixin product-item(product)
   .col-4.mb-3
     .product-item
       .inner-image
-        img(src=product.thumbnail[0], alt=product.title)
+        a(href=`/products/detail/${product.slug}` style="text-decoration: none")
+          img(src=product.thumbnail[0], alt=product.title)
         if(product.featured == "1")
           .inner-featured Nổi bật
       .inner-content
