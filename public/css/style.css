@@ -12,6 +12,14 @@
     border-radius: 50%;
 }
 
+.header .inner-title a {
+  max-width: 100%;
+  color: palevioletred;
+  text-decoration: none;
+  font-size: 24px;
+  font-family: Garamond, serif;
+}
+
 .header .inner-menu > ul {
     list-style: none;
     padding: 0;
