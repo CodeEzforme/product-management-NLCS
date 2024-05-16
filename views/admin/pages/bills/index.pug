@@ -1,0 +1,61 @@
+extends ../../layouts/default
+//- include ../../mixins/filter-status
+include ../../mixins/search
+//- include ../../mixins/pagination
+//- include ../../mixins/change-multi
+//- include ../../mixins/alert
+include ../../mixins/sort
+//- include ../../mixins/moment
+
+block main
+  if(role.permissions.includes("products_view"))
+    h1.mb-4 Danh sách đơn hàng
+    .card.mb-3
+      .card-header Tìm kiếm đơn hàng
+      .card-body
+        .row
+          .col-6
+            +search(keyword)
+    .card.mb-3
+      .card-header Sắp xếp
+      .card-body
+        .row
+          .col-4
+            +sort()
+    each item, index in bill
+      .order
+        h2 Thông tin khách hàng
+        p
+          strong Tên:
+          |  #{item.userInfo.fullName}
+        p
+          strong Địa chỉ:
+          |  #{item.userInfo.address}
+        p
+          strong Số điện thoại:
+          |  #{item.userInfo.phone}
+
+        h2 Chi tiết đơn hàng
+        table.order-details
+          thead
+            tr
+              th Mã sản phẩm
+              th Số lượng
+              th Giá
+              th Giảm giá
+              th Tổng giá
+          tbody
+            each product in item.products
+              tr
+                td= product.product_id
+                td= product.quantity
+                td= `$${product.price.toFixed(2)}`
+                td= `${product.discountPercentage}%`
+                td= `$${(product.price * product.quantity * (1 - product.discountPercentage / 100)).toFixed(2)}`
+
+        h6
+          | Ngày tạo:
+          | #{new Date(item.createdAt).toLocaleString()}
+        h6
+          | Ngày cập nhật:
+          | #{new Date(item.updatedAt).toLocaleString()}
