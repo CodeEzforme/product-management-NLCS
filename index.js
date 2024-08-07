@@ -6,8 +6,8 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session");
 const moment = require("moment");
 var path = require('path');
-// const http = require("http");
-// const { Server } = require("socket.io");
+const http = require("http");
+const { Server } = require("socket.io");
 require('dotenv').config();
 
 const database = require("./config/database");
@@ -25,11 +25,17 @@ app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 // // Socket.io
-// const io = new Server(server);
+const server = http.createServer(app);
+const io = new Server(server);
+global._io = io;
 
 // Flash
 app.use(cookieParser("LGASGFSAADSJFD"));
-app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(session({
+    cookie: {
+        maxAge: 60000
+    }
+}));
 app.use(flash());
 // Hết Flash
 
@@ -53,16 +59,27 @@ app.locals.moment = moment;
 // Hết biến toàn cục
 
 //routes
+
+const trimInput = (req, res, next) => {
+    for (let key in req.body) {
+        if (typeof req.body[key] === 'string') {
+            req.body[key] = req.body[key].trim();
+        }
+    }
+    next();
+}
+
+app.use(trimInput);
 routeAdmin(app);
 route(app);
 
 app.get('*', (req, res) => {
     res.render('client/pages/errors/404', {
-      pageTitle: '404 Not Found'
+        pageTitle: '404 Not Found'
     })
 })
 
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });

@@ -16,6 +16,7 @@ const upload = multer();
 const controller = require("../../controllers/admin/product.controller");
 const validate = require("../../validates/admin/product.validate");
 const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware");
+const trimInput = require("../../middlewares/admin/stringInput.middleware");
 // const uploadToCloudMiddleware = require("../../middlewares/admin/uploadToCloud.middleware");
 
 router.get("/", controller.index);

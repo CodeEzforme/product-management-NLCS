@@ -16,15 +16,15 @@ const settingRouter = require("./setting.route")
 module.exports = (app) => {
     const PATH_ADMIN = "/" + systemConfig.prefixAdmin;
 
-    app.use(PATH_ADMIN + "/dashboard", authMiddleware.requireAuth,dashboardRoutes);
+    app.use(PATH_ADMIN + "/dashboard", authMiddleware.requireAuth, dashboardRoutes);
 
-    app.use(PATH_ADMIN + "/products",authMiddleware.requireAuth, productRoutes);
+    app.use(PATH_ADMIN + "/products", authMiddleware.requireAuth, productRoutes);
 
-    app.use(PATH_ADMIN + "/bills",authMiddleware.requireAuth, billRoutes);
+    app.use(PATH_ADMIN + "/bills", authMiddleware.requireAuth, billRoutes);
 
-    app.use(PATH_ADMIN + "/products-category", authMiddleware.requireAuth,productCategoryRoutes);
+    app.use(PATH_ADMIN + "/products-category", authMiddleware.requireAuth, productCategoryRoutes);
 
-    app.use(PATH_ADMIN + "/roles", authMiddleware.requireAuth,roleRoutes);
+    app.use(PATH_ADMIN + "/roles", authMiddleware.requireAuth, roleRoutes);
 
     app.use(PATH_ADMIN + "/accounts", authMiddleware.requireAuth,accountRoutes);
 

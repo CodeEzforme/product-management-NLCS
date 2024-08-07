@@ -13,7 +13,14 @@ module.exports.index = async (req, res) => {
   // }).sort({ position: "desc" });
 
   /// pagination////////////////////////////////
+  // for (let key in req.body) {
+  //   if (typeof req.body[key] === 'string') {
+  //     req.body[key] = req.body[key].trim();
+  //   }
+  // }
+
   const objectSearch = searchHelper(req.query);
+  console.log(objectSearch);
   let find = {
     deleted: false,
   };
