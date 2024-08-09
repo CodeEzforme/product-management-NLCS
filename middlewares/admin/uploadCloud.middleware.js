@@ -17,15 +17,7 @@ module.exports.uploadFields = async (req, res, next) => {
   next();
 };
 
-//////////
-
-
-
-
-
-
-
-
+/////////////////////////////////
 
 module.exports.upload = async (req, res, next) => {
   if(req.file) {
