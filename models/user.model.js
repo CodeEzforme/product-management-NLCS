@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 const generate = require('../helpers/generate');
 const systemConfig = require(".././config/system");
 
-const usersSchema = new mongoose.Schema(
-{
+const usersSchema = new mongoose.Schema({
   fullName: String,
   email: String,
   password: String,
@@ -13,12 +12,10 @@ const usersSchema = new mongoose.Schema(
   },
   phone: String,
   avatar: String,
-  friendList: [
-    {
-      user_id: String,
-      room_chat_id: String,
-    }
-  ],
+  friendList: [{
+    user_id: String,
+    room_chat_id: String,
+  }],
   acceptFriends: Array,
   requestFriends: Array,
   onlineStatus: String,
@@ -31,8 +28,9 @@ const usersSchema = new mongoose.Schema(
     default: false
   },
   deletedAt: Date
-},
-{ timestamps: true })
+}, {
+  timestamps: true
+})
 
 const Users = mongoose.model("Users", usersSchema, 'users');
 

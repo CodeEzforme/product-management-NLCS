@@ -81,7 +81,7 @@ socket.on('SERVER_RETURN_MESSAGE', (data) => {
   if (boxImages) {
     const gallery = new Viewer(boxImages);
   }
-})
+});
 
 // Scroll Chat to bottom
 const chatBody = document.querySelector('.chat .inner-body');
