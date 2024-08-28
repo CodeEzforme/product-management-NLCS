@@ -2,7 +2,6 @@ const Product = require("../../models/product.model");
 const ProductCategory = require("../../models/product-category.model");
 
 const productsHelper = require("../../helpers/product");
-const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination");
 
 // hỗ trợ router [GET] /products
@@ -12,26 +11,12 @@ module.exports.index = async (req, res) => {
   //     deleted: false
   // }).sort({ position: "desc" });
 
-  /// pagination////////////////////////////////
-  // for (let key in req.body) {
-  //   if (typeof req.body[key] === 'string') {
-  //     req.body[key] = req.body[key].trim();
-  //   }
-  // }
+  // / pagination////////////////////////////////
 
-  const objectSearch = searchHelper(req.query);
-  console.log(objectSearch);
   let find = {
     deleted: false,
+    status: "active"
   };
-
-  if (req.query.status) {
-    find.status = req.query.status;
-  }
-
-  if (req.query.keyword) {
-    find.title = objectSearch.regex;
-  }
 
   // Pagination
   let initPagination = {
@@ -44,7 +29,6 @@ module.exports.index = async (req, res) => {
 
   // sort
   let sort = {};
-
   if (req.query.sortKey && req.query.sortValue) {
     sort[req.query.sortKey] = req.query.sortValue;
   } else {
@@ -64,7 +48,7 @@ module.exports.index = async (req, res) => {
   res.render("client/pages/products/index", {
     pageTitle: "Danh sách sản phẩm",
     products: newProducts,
-    keyword: objectSearch.keyword,
+    // keyword: objectSearch.keyword,
     pagination: objectPagination
   });
 }
@@ -78,7 +62,7 @@ module.exports.category = async (req, res) => {
     };
     let initPagination = {
       currentPage: 1,
-      limitItems: 8
+      limitItems: 9
     }
     /// pagination////////////////////////////////
 

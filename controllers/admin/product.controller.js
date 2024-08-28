@@ -11,8 +11,6 @@ const createTree = require("../../helpers/createTree");
 
 // Hỗ trợ route [GET] /admin/products
 module.exports.index = async (req, res) => {
-
-
     const filterStatus = filterStatusHelper(req.query);
     const objectSearch = searchHelper(req.query);
 

@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
                 })
 
                 if (!userExisted) {
-                    // Add requestFriend feild to current user
+                    // Add requestFriend field to current user
                     await Users.updateOne({
                         _id: currentUserId
                     }, {
