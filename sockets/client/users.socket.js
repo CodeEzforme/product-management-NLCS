@@ -80,7 +80,8 @@ module.exports = async (req, res) => {
                 }
 
                 const userExisted = await Users.findOne({
-                    _id: otherUserId
+                    _id: currentUserId,
+                    requestFriends: otherUserId
                 })
                 // Remove requestFriend field to current user
                 if (userExisted) {

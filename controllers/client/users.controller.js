@@ -17,10 +17,21 @@ module.exports.notFriend = async (req, res) => {
     const requestFriendList = currentUser.requestFriends;
 
     const users = await Users.find({
-      $and: [
-        { _id: { $ne: currentUserId } },
-        { _id: { $nin: acceptFriendList } },
-        { _id: { $nin: requestFriendList } },
+      $and: [{
+          _id: {
+            $ne: currentUserId
+          }
+        },
+        {
+          _id: {
+            $nin: acceptFriendList
+          }
+        },
+        {
+          _id: {
+            $nin: requestFriendList
+          }
+        },
       ],
       status: 'active',
       deleted: false
@@ -38,65 +49,67 @@ module.exports.notFriend = async (req, res) => {
   }
 }
 
-// // [GET] /users/request
-// module.exports.request = async (req, res) => {
-//   try {
-//     usersSocket(req, res); // SockerIO
+// [GET] /users/request
+module.exports.request = async (req, res) => {
+  try {
+    usersSocket(req, res); // SockerIO
 
-//     const currentUserId = res.locals.user.id;
-//     const currentUser = await Users.findOne({
-//       _id: currentUserId,
-//     })
+    const currentUserId = res.locals.user.id;
+    const currentUser = await Users.findOne({
+      _id: currentUserId,
+    })
 
-//     const friendRequestList = currentUser.requestFriends;
+    const friendRequestList = currentUser.requestFriends;
 
-//     const users = await Users.find({
-//       _id: { $in: friendRequestList },
-//       status: 'active',
-//       deleted: false
-//     })
+    const users = await Users.find({
+      _id: {
+        $in: friendRequestList
+      },
+      status: 'active',
+      deleted: false
+    })
 
-//     res.render('client/pages/users/request', {
-//       pageTitle: 'Request send',
-//       users: users
-//     })
+    res.render('client/pages/users/request', {
+      pageTitle: 'Lời mời đã gửi',
+      users: users
+    })
 
-//   } catch (error) {
-//     console.log("ERROR OCCURRED:", error);
-//     req.flash('error', 'Page is not exists, directed to home page');
-//     res.redirect("back");
-//   }
-// }
+  } catch (error) {
+    console.log("ERROR OCCURRED:", error);
+    req.flash('error', 'Page is not exists, directed to home page');
+    res.redirect("back");
+  }
+}
 
-// // [GET] /users/accept
-// module.exports.accept = async (req, res) => {
-//   try {
-//     usersSocket(req, res);
+// [GET] /users/accept
+module.exports.accept = async (req, res) => {
+  try {
+    usersSocket(req, res);
 
-//     const currentUserId = res.locals.user.id;
-//     const currentUser = await Users.findOne({
-//       _id: currentUserId,
-//     })
+    const currentUserId = res.locals.user.id;
+    const currentUser = await Users.findOne({
+      _id: currentUserId,
+    })
 
-//     const friendAcceptList = currentUser.acceptFriends;
+    const friendAcceptList = currentUser.acceptFriends;
 
-//     const users = await Users.find({
-//       _id: { $in: friendAcceptList },
-//       status: 'active',
-//       deleted: false
-//     })
+    const users = await Users.find({
+      _id: { $in: friendAcceptList },
+      status: 'active',
+      deleted: false
+    })
 
-//     res.render('client/pages/users/accept', {
-//       pageTitle: 'Request accept',
-//       users: users
-//     })
+    res.render('client/pages/users/accept', {
+      pageTitle: 'Lời mời đã nhận',
+      users: users
+    })
 
-//   } catch (error) {
-//     console.log("ERROR OCCURRED:", error);
-//     req.flash('error', 'Page is not exists, directed to home page');
-//     res.redirect("back");
-//   }
-// }
+  } catch (error) {
+    console.log("ERROR OCCURRED:", error);
+    req.flash('error', 'Page is not exists, directed to home page');
+    res.redirect("back");
+  }
+}
 
 // // [GET] /users/friend
 // module.exports.friends = async (req, res) => {
