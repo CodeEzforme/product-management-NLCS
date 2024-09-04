@@ -83,7 +83,7 @@ module.exports.orderPost = async (req, res) => {
     const cart = await Cart.findOne({
       _id: cartId
     })
-
+    // console.log(products);
     for (item of cart.products) {
       const productObject = {
         product_id: item.product_id,
@@ -91,7 +91,7 @@ module.exports.orderPost = async (req, res) => {
         price: 0,
         discountPercentage: 0
       }
-       
+
       const productInfo = await Product.findOne({
         _id: item.product_id
       })
@@ -100,8 +100,22 @@ module.exports.orderPost = async (req, res) => {
       productObject.discountPercentage = productInfo.discountPercentage;
 
       products.push(productObject);
+
+      // const itemId = await item.findOne({
+      //   _id: item.product_id
+      // })
+
+      const updateStock = productInfo.stock - item.quantity;
+
+      await Product.updateOne({
+        _id: item.product_id,
+      }, {
+        stock: updateStock
+      })
+
     }
-    
+
+
     const order = new Order({
       cart_id: cartId,
       userInfo: userInfo,
@@ -109,10 +123,11 @@ module.exports.orderPost = async (req, res) => {
     })
     await order.save();
 
-    await Cart.updateOne(
-      { _id: cartId },
-      { products: [] }
-    )
+    await Cart.updateOne({
+      _id: cartId
+    }, {
+      products: []
+    })
 
     res.redirect(`/checkout/success/${order.id}`)
 

@@ -75,11 +75,10 @@ module.exports.addPost = async (req, res) => {
         const cartId = req.cookies.cartId;
         const quantityAdd = parseInt(req.body.quantity);
 
-        console.log(cartId);
+        // console.log(cartId);
         const cart = await Cart.findOne({
             _id: cartId
         })
-
         // Check if product existed in cart
         const productExisted = cart.products.find(product => product.product_id == productId);
         if (productExisted) {
