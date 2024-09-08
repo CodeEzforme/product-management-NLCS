@@ -92,7 +92,7 @@ socket.on('SERVER_RETURN_INFO_ACCEPT_FRIEND', (data) => {
 
     const dataUsersAccept = document.querySelector('[data-users-accept]');
 
-    if (dataUsersAccept) { 
+    if (dataUsersAccept) {
         const userId = dataUsersAccept.getAttribute("data-users-accept");
         if (userId == data.userId) {
             const userBox = document.createElement('div');
@@ -113,16 +113,16 @@ socket.on('SERVER_RETURN_INFO_ACCEPT_FRIEND', (data) => {
               </div>
               <div class="inner-buttons">
                 <button class="btn btn-sm btn-primary mr-1" btn-accept-friend=${data.currentUserInfo._id}>
-                  Accept
+                  Chấp nhận
                 </button>
                 <button class="btn btn-sm btn-secondary mr-1" btn-refuse-friend=${data.currentUserInfo._id}>
-                  Refuse
+                  Xóa
                 </button>
                 <button class="btn btn-sm btn-secondary mr-1" btn-deleted-friend="" disabled="">
-                  Refused
+                  Đã xóa
                 </button>
                 <button class="btn btn-sm btn-secondary mr-1" btn-accepted-friend="" disabled="">
-                  Accepted
+                  Đã chấp nhận
                 </button>
               </div>
             </div>
@@ -156,7 +156,6 @@ socket.on('SERVER_RETURN_INFO_ACCEPT_FRIEND', (data) => {
 // END SERVER_RETURN_INFO_ACCEPT_FRIEND
 
 // SERVER_RETURN_USER_ID_CANCEL_FRIEND
-
 socket.on("SERVER_RETURN_USER_ID_CANCEL_FRIEND", (data) => {
     const dataUsersAccept = document.querySelector('[data-users-accept]');
     const userId = dataUsersAccept.getAttribute("data-users-accept");

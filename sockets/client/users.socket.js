@@ -106,7 +106,7 @@ module.exports = async (req, res) => {
                     acceptFriendsLength: acceptFriendsLength
                 })
 
-                // Server return current user id to other user for cancle displaying user account 
+                // Server return current user id to other user for cancel displaying user account 
                 socket.broadcast.emit('SERVER_RETURN_USER_ID_CANCEL_FRIEND', {
                     currentUserId: currentUserId,
                     otherUserId: otherUserId
