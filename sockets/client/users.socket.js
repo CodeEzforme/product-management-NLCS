@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
                     acceptFriendsLength: acceptFriendsLength
                 })
 
-                // Send current user information to other user 
+                // Send current user information to other user
                 const currentUserInfo = await Users.findOne({
                     _id: currentUserId
                 }).select('id avatar fullName');

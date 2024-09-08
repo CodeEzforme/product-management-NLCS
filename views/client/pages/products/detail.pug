@@ -35,7 +35,7 @@ block main
 
           if (product.category)
             div(class="inner-category")
-              span Danh mục:
+              span Danh mục: 
               a(href=`/products/${product.category.slug}`) #{product.category.title}
 
           if (product.newPrice)
@@ -54,23 +54,27 @@ block main
             span(class="likeCount") 2k
           if (product.stock)
             div(class="inner-stock") Còn lại: <span>#{product.stock}</span> Sản phẩm
+          if (!product.stock)
+            div(class="inner-stock-empty")
+              h5 Sản phẩm tạm hết hàng!
 
-          form(
-            action=`/cart/add/${product.id}`
-            method="POST"
-          )
-            input(
-              class="form-control mb-2"
-              type="number"
-              name="quantity"
-              value="1"
-              min="1"
-              max=product.stock
+          if (product.stock > 0)
+            form(
+              action=`/cart/add/${product.id}`
+              method="POST"
             )
-            button(
-              type="submit"
-              class="btn btn-success btn-block"
-            ) Thêm vào giỏ hàng
+              input(
+                class="form-control mb-2"
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+                max=product.stock
+              )
+              button(
+                type="submit"
+                class="btn btn-success btn-block"
+              ) Thêm vào giỏ hàng
 
     hr
 

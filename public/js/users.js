@@ -92,7 +92,7 @@ socket.on('SERVER_RETURN_INFO_ACCEPT_FRIEND', (data) => {
 
     const dataUsersAccept = document.querySelector('[data-users-accept]');
 
-    if (dataUsersAccept) {
+    if (dataUsersAccept) { 
         const userId = dataUsersAccept.getAttribute("data-users-accept");
         if (userId == data.userId) {
             const userBox = document.createElement('div');
@@ -102,7 +102,7 @@ socket.on('SERVER_RETURN_INFO_ACCEPT_FRIEND', (data) => {
             userBox.innerHTML = `
           <div class="box-user">
             <div class="inner-avatar">
-              <img 
+              <img
                 src="${data.currentUserInfo.avatar ? data.currentUserInfo.avatar : '/images/img_avatar.png'}" 
                 alt="${data.currentUserInfo.fullName}"
               >
