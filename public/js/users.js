@@ -91,7 +91,6 @@ socket.on('SERVER_RETURN_INFO_ACCEPT_FRIEND', (data) => {
     // display users information - friend request page
 
     const dataUsersAccept = document.querySelector('[data-users-accept]');
-
     if (dataUsersAccept) {
         const userId = dataUsersAccept.getAttribute("data-users-accept");
         if (userId == data.userId) {
