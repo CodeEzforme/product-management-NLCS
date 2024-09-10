@@ -94,7 +94,9 @@ module.exports.accept = async (req, res) => {
     const friendAcceptList = currentUser.acceptFriends;
 
     const users = await Users.find({
-      _id: { $in: friendAcceptList },
+      _id: {
+        $in: friendAcceptList
+      },
       status: 'active',
       deleted: false
     })
@@ -111,39 +113,39 @@ module.exports.accept = async (req, res) => {
   }
 }
 
-// // [GET] /users/friend
-// module.exports.friends = async (req, res) => {
-//   try {
-//     usersSocket(req, res);
+// [GET] /users/friend
+module.exports.friends = async (req, res) => {
+  try {
+    usersSocket(req, res);
 
-//     const currentUserId = res.locals.user.id;
-//     const currentUser = await Users.findOne({
-//       _id: currentUserId,
-//     })
+    const currentUserId = res.locals.user.id;
+    const currentUser = await Users.findOne({
+      _id: currentUserId,
+    })
 
-//     const friendList = currentUser.friendList;
+    const friendList = currentUser.friendList;
 
-//     const friendListId = friendList.map(item => item.user_id)
+    const friendListId = friendList.map(item => item.user_id)
 
-//     const users = await Users.find({
-//       _id: { $in: friendListId },
-//       status: 'active',
-//       deleted: false
-//     }).select('id fullName avatar onlineStatus');
+    const users = await Users.find({
+      _id: { $in: friendListId },
+      status: 'active',
+      deleted: false
+    }).select('id fullName avatar onlineStatus');
 
-//     users.forEach(user => {
-//       const userInfo = friendList.find(friend => friend.user_id == user.id);
-//       user.chatRoomId = userInfo.room_chat_id;
-//     })
+    // users.forEach(user => {
+    //   const userInfo = friendList.find(friend => friend.user_id == user.id);
+    //   user.chatRoomId = userInfo.room_chat_id;
+    // })
 
-//     res.render('client/pages/users/friends', {
-//       pageTitle: 'Friend List',
-//       users: users
-//     })
+    res.render('client/pages/users/friends', {
+      pageTitle: 'Danh sách bạn bè',
+      users: users
+    })
 
-//   } catch (error) {
-//     console.log("ERROR OCCURRED:", error);
-//     req.flash('error', 'Page is not exists, directed to home page');
-//     res.redirect("back");
-//   }
-// }
+  } catch (error) {
+    console.log("ERROR OCCURRED:", error);
+    req.flash('error', 'Page is not exists, directed to home page');
+    res.redirect("back");
+  }
+}

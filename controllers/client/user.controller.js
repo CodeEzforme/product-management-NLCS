@@ -6,9 +6,11 @@ const ForgotPassword = require('../../models/forgot-password.model')
 const md5 = require("md5");
 
 const generateHelper = require('../../helpers/generate');
+
 const {
     response
-} = require('express');
+} = require("express");
+
 const sendMailHelper = require('../../helpers/sendMail');
 
 // [GET] /user/register
@@ -42,15 +44,15 @@ module.exports.login = async (req, res) => {
 // [GET] /user/logout
 module.exports.logout = async (req, res) => {
     res.clearCookie('tokenUser');
-    //   await Users.updateOne({
-    //     _id: res.locals.user.id
-    //   }, {
-    //     onlineStatus: 'offline'
-    //   })
+    await Users.updateOne({
+        _id: res.locals.user.id
+    }, {
+        onlineStatus: 'offline'
+    })
 
-    //   _io.once('connection', (socket) => {
+    // _io.once('connection', (socket) => {
     //     socket.broadcast.emit('SERVER_RETURN_USER_OFFLINE', res.locals.user.id);
-    //   })
+    // })
 
     req.flash('success', 'Tài khoản đã được đăng xuất!')
     res.redirect('/')
@@ -227,17 +229,16 @@ module.exports.loginPost = async (req, res) => {
             user_id: user.id
         })
 
-        // // Update online status
-        // await Users.updateOne({
-        //   _id: user.id
-        // }, {
-        //   onlineStatus: 'online'
-        // })
+        // Update online status
+        await Users.updateOne({
+            _id: user.id
+        }, {
+            onlineStatus: 'online'
+        })
 
-        // _io.once('connection', (socket) => {
-        //   socket.broadcast.emit('SERVER_RETURN_USER_ONLINE', user.id
-        //   )
-        // })
+        _io.once('connection', (socket) => {
+            socket.broadcast.emit('SERVER_RETURN_USER_ONLINE', user.id)
+        })
 
         res.cookie('tokenUser', user.tokenUser);
         req.flash('success', 'Đăng nhập thành công!')

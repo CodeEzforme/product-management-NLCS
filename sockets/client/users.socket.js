@@ -149,7 +149,7 @@ module.exports = async (req, res) => {
 
             socket.on('CLIENT_ACCEPT_FRIEND', async (otherUserId) => {
                 // Add {user_id, room_chat_id } of OTHER USER to friendList of CURRENT USER
-                // Remove id of OTHER USER in acceptFriends feild of CURRENT USER
+                // Remove id of OTHER USER in acceptFriends field of CURRENT USER
 
                 const currentUserExisted = await Users.findOne({
                     _id: currentUserId,
@@ -161,25 +161,25 @@ module.exports = async (req, res) => {
                     requestFriends: currentUserId
                 })
 
-                // create chat room
-                let chatRoom;
+                // // create chat room
+                // let chatRoom;
 
-                if (currentUserExisted && otherUserExisted) {
-                    chatRoom = new ChatRoom({
-                        roomType: 'friend',
-                        users: [{
-                                user_id: currentUserId,
-                                role: 'superAdmin'
-                            },
-                            {
-                                user_id: otherUserId,
-                                role: 'superAdmin'
-                            }
-                        ]
-                    });
+                // if (currentUserExisted && otherUserExisted) {
+                //     chatRoom = new ChatRoom({
+                //         roomType: 'friend',
+                //         users: [{
+                //                 user_id: currentUserId,
+                //                 role: 'superAdmin'
+                //             },
+                //             {
+                //                 user_id: otherUserId,
+                //                 role: 'superAdmin'
+                //             }
+                //         ]
+                //     });
 
-                    await chatRoom.save();
-                }
+                //     await chatRoom.save();
+                // }
 
 
                 if (currentUserExisted) {
@@ -189,7 +189,7 @@ module.exports = async (req, res) => {
                         $push: {
                             friendList: {
                                 user_id: otherUserId,
-                                room_chat_id: chatRoom.id
+                                // room_chat_id: chatRoom.id
                             }
                         },
                         $pull: {
@@ -198,8 +198,8 @@ module.exports = async (req, res) => {
                     })
                 }
 
-                // Add {user_id, room_chat_id } of CURRENT USER to friendList of OTHER USER
-                // Remove id of CURRENT USER in acceptFriends feild of OTHER USER
+                // // Add {user_id, room_chat_id } of CURRENT USER to friendList of OTHER USER
+                // // Remove id of CURRENT USER in acceptFriends field of OTHER USER
 
                 if (otherUserExisted) {
                     await Users.updateOne({
@@ -208,7 +208,7 @@ module.exports = async (req, res) => {
                         $push: {
                             friendList: {
                                 user_id: currentUserId,
-                                room_chat_id: chatRoom.id
+                                // room_chat_id: chatRoom.id
                             }
                         },
                         $pull: {
