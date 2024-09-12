@@ -50,9 +50,9 @@ module.exports.logout = async (req, res) => {
         onlineStatus: 'offline'
     })
 
-    // _io.once('connection', (socket) => {
-    //     socket.broadcast.emit('SERVER_RETURN_USER_OFFLINE', res.locals.user.id);
-    // })
+    _io.once('connection', (socket) => {
+        socket.broadcast.emit('SERVER_RETURN_USER_OFFLINE', res.locals.user.id);
+    })
 
     req.flash('success', 'Tài khoản đã được đăng xuất!')
     res.redirect('/')
