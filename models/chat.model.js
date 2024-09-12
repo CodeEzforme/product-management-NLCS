@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
 // const generate = require('../helpers/generateString');
 
-const chatSchema = new mongoose.Schema(
-{
+const chatSchema = new mongoose.Schema({
   user_id: String,
-  room_chat_id: String,
+  room_chat_id: String, 
   content: String,
   images: Array,
   deleted: {
@@ -12,8 +11,9 @@ const chatSchema = new mongoose.Schema(
     default: false
   },
   deletedAt: Date
-},
-{ timestamps: true })
+}, {
+  timestamps: true
+})
 
 const Chat = mongoose.model("Chat", chatSchema, 'chats');
 

@@ -133,10 +133,10 @@ module.exports.friends = async (req, res) => {
       deleted: false
     }).select('id fullName avatar onlineStatus');
 
-    // users.forEach(user => {
-    //   const userInfo = friendList.find(friend => friend.user_id == user.id);
-    //   user.chatRoomId = userInfo.room_chat_id;
-    // })
+    users.forEach(user => {
+      const userInfo = friendList.find(friend => friend.user_id == user.id);
+      user.chatRoomId = userInfo.room_chat_id;
+    })
 
     res.render('client/pages/users/friends', {
       pageTitle: 'Danh sách bạn bè',

@@ -41,8 +41,8 @@ header.header
             li
               a(href='/cart') Giỏ hàng (#{miniCart && miniCart.totalQuantity ? miniCart.totalQuantity : "0"})
             if (user)
-              li
-                a(href="/chat") Chat
+              //- li
+              //-   a(href="/chat") Chat
               li
                 a(href='/user/info') #{user.fullName}
               li

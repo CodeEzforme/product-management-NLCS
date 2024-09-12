@@ -1,5 +1,5 @@
 const Users = require('../../models/user.model');
-// const ChatRoom = require('../../models/rooms-chat.model');
+const ChatRoom = require('../../models/room-chat.model');
 
 module.exports = async (req, res) => {
     try {
@@ -162,24 +162,24 @@ module.exports = async (req, res) => {
                 })
 
                 // // create chat room
-                // let chatRoom;
+                let chatRoom;
 
-                // if (currentUserExisted && otherUserExisted) {
-                //     chatRoom = new ChatRoom({
-                //         roomType: 'friend',
-                //         users: [{
-                //                 user_id: currentUserId,
-                //                 role: 'superAdmin'
-                //             },
-                //             {
-                //                 user_id: otherUserId,
-                //                 role: 'superAdmin'
-                //             }
-                //         ]
-                //     });
+                if (currentUserExisted && otherUserExisted) {
+                    chatRoom = new ChatRoom({
+                        roomType: 'friend',
+                        users: [{
+                                user_id: currentUserId,
+                                role: 'superAdmin'
+                            },
+                            {
+                                user_id: otherUserId,
+                                role: 'superAdmin'
+                            }
+                        ]
+                    });
 
-                //     await chatRoom.save();
-                // }
+                    await chatRoom.save();
+                }
 
 
                 if (currentUserExisted) {
@@ -189,7 +189,7 @@ module.exports = async (req, res) => {
                         $push: {
                             friendList: {
                                 user_id: otherUserId,
-                                // room_chat_id: chatRoom.id
+                                room_chat_id: chatRoom.id
                             }
                         },
                         $pull: {
@@ -208,7 +208,7 @@ module.exports = async (req, res) => {
                         $push: {
                             friendList: {
                                 user_id: currentUserId,
-                                // room_chat_id: chatRoom.id
+                                room_chat_id: chatRoom.id
                             }
                         },
                         $pull: {

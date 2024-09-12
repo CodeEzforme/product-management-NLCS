@@ -5,8 +5,7 @@ const controller = require('../../controllers/client/chat.controller')
 // const chatMiddleware = require('../../middlewares/client/chat.middleware') 
 
 router.get(
-//   '/:chatRoomId',
-    "/",
+  '/:chatRoomId',
     // chatMiddleware.allowAccess,
     controller.index
 );
