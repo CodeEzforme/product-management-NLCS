@@ -32,4 +32,4 @@ if (buttonsPagination.length > 0) {
 //  Hết Pagination
 
 /// đăng ký annimation
-document.querySelector('.user').classList.add('active'); // Thêm lớp active
+document.querySelector('.user')?.classList.add('active'); // Thêm lớp active

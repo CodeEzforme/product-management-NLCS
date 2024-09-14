@@ -3,7 +3,7 @@ const Users = require('../../models/user.model');
 
 const chatSocket = require('../../sockets/client/chat.socket')
 
-// [GET] /chat/:chatRoomId 
+// [GET] /chat/:chatRoomId
 module.exports.index = async (req, res) => {
   try {
     const chatRoomId = req.params.chatRoomId;

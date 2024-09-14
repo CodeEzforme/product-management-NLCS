@@ -6,12 +6,20 @@ const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-image', {
   maxFileCount: 6
 });
 
-// CLIENT SEND MESSAGE
+// CLIENT SEND
+document.addEventListener("DOMContentLoaded", function () {
+  const formDataSend = document.querySelector(".chat .inner-form");
+  console.log('form::', formDataSend);
+});
+
 const formDataSend = document.querySelector(".chat .inner-form");
+console.log('form::', formDataSend);
+
 if (formDataSend) {
   formDataSend.addEventListener('submit', (e) => {
     e.preventDefault();
     const content = e.target.elements.content.value;
+    console.log(content);
     const images = upload.cachedFileArray || [];
 
     if (content || images.length > 0) {
@@ -116,8 +124,8 @@ if (emojiPicker) {
   const inputChat = document.querySelector('.chat .inner-form input[name="content"]')
 
   emojiPicker.addEventListener('emoji-click', event => {
-    const icon = event.detail.unicode; 
-    inputChat.value = inputChat.value + icon; 
+    const icon = event.detail.unicode;
+    inputChat.value = inputChat.value + icon;
 
     const end = inputChat.value.length;
     inputChat.setSelectionRange(end, end);

@@ -4,7 +4,7 @@ const Users = require('../../models/user.model');
 module.exports.index = async (req, res) => {
   try {
     res.render('client/pages/rooms-chat/index', {
-      pageTitle: 'Chat Rooms'
+      pageTitle: 'Danh sách phòng'
     })
 
   } catch (error) {
