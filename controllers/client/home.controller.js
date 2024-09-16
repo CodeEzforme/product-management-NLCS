@@ -37,7 +37,7 @@ module.exports.index = async (req, res) => {
 
     // console.log(newCategoryProducts);
     res.render("client/pages/home/index", {
-      pageTitle: 'Luxury Flowers',
+      pageTitle: 'Chả lụa Tùng Loan',
       featuredProducts: newFeaturedProducts,
       // layoutCategoryProducts: newCategoryProducts
       newProducts: newProductsNew

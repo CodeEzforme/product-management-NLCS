@@ -1,32 +1,24 @@
-import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
+// import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
 
 // File upload with image
-const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-image', {
-  multiple: true,
-  maxFileCount: 6
-});
+// const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-image', {
+//   multiple: true,
+//   maxFileCount: 6
+// });
 
-// CLIENT SEND
-document.addEventListener("DOMContentLoaded", function () {
-  const formDataSend = document.querySelector(".chat .inner-form");
-  console.log('form::', formDataSend);
-});
-
+// CLIENT SEND MESSAGE
 const formDataSend = document.querySelector(".chat .inner-form");
-console.log('form::', formDataSend);
-
 if (formDataSend) {
   formDataSend.addEventListener('submit', (e) => {
     e.preventDefault();
     const content = e.target.elements.content.value;
-    console.log(content);
-    const images = upload.cachedFileArray || [];
+    // const images = upload.cachedFileArray || [];
 
-    if (content || images.length > 0) {
+    if (content || images.length) {
       // send images
       socket.emit('CLIENT_SEND_MESSAGE', {
         content: content,
-        images: images
+        // images: images
       });
 
       e.target.elements.content.value = "";
@@ -37,10 +29,16 @@ if (formDataSend) {
 
       clearTimeout(timeOut); //
 
-      upload.resetPreviewPanel();
+      // upload.resetPreviewPanel();
     }
   })
 }
+
+// const formDataSend = document.querySelector(".chat .inner-form");
+// if (formDataSend) {
+//   console.log(formDataSend);
+// }
+
 
 // SERVER RETURN MESSAGE
 socket.on('SERVER_RETURN_MESSAGE', (data) => {
@@ -110,14 +108,14 @@ const showTyping = () => {
 }
 
 // Imoji picker
-const buttonIcon = document.querySelector('.button-icon');
-if (buttonIcon) {
-  const tooltip = document.querySelector('.tooltip');
-  Popper.createPopper(buttonIcon, tooltip);
-  buttonIcon.onclick = () => {
-    tooltip.classList.toggle('shown')
-  }
-}
+// const buttonIcon = document.querySelector('.button-icon');
+// if (buttonIcon) {
+//   const tooltip = document.querySelector('.tooltip');
+//   Popper.createPopper(buttonIcon, tooltip);
+//   buttonIcon.onclick = () => {
+//     tooltip.classList.toggle('shown')
+//   }
+// }
 
 const emojiPicker = document.querySelector('emoji-picker')
 if (emojiPicker) {
