@@ -1,6 +1,6 @@
-// import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
+import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
 
-// File upload with image
+// // File upload with image
 // const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-image', {
 //   multiple: true,
 //   maxFileCount: 6
@@ -12,13 +12,13 @@ if (formDataSend) {
   formDataSend.addEventListener('submit', (e) => {
     e.preventDefault();
     const content = e.target.elements.content.value;
-    // const images = upload.cachedFileArray || [];
+    const images = upload.cachedFileArray || [];
 
     if (content || images.length) {
       // send images
       socket.emit('CLIENT_SEND_MESSAGE', {
         content: content,
-        // images: images
+        images: images
       });
 
       e.target.elements.content.value = "";
@@ -29,7 +29,7 @@ if (formDataSend) {
 
       clearTimeout(timeOut); //
 
-      // upload.resetPreviewPanel();
+      upload.resetPreviewPanel();
     }
   })
 }
@@ -108,15 +108,17 @@ const showTyping = () => {
 }
 
 // Imoji picker
-// const buttonIcon = document.querySelector('.button-icon');
-// if (buttonIcon) {
-//   const tooltip = document.querySelector('.tooltip');
-//   Popper.createPopper(buttonIcon, tooltip);
-//   buttonIcon.onclick = () => {
-//     tooltip.classList.toggle('shown')
-//   }
-// }
+// Show Popup
+const buttonIcon = document.querySelector('.button-icon');
+if (buttonIcon) {
+  const tooltip = document.querySelector('.tooltip');
+  Popper.createPopper(buttonIcon, tooltip);
+  buttonIcon.onclick = () => {
+    tooltip.classList.toggle('shown')
+  }
+}
 
+// insert icon to input
 const emojiPicker = document.querySelector('emoji-picker')
 if (emojiPicker) {
   const inputChat = document.querySelector('.chat .inner-form input[name="content"]')
@@ -131,14 +133,21 @@ if (emojiPicker) {
 
     showTyping();
   });
-
-  // CLIENT SEND TYPING
-  if (inputChat) {
-    inputChat.addEventListener("keyup", () => {
-      showTyping();
-    })
-  }
 }
+// const emojiPicker = document.querySelector('emoji-picker')
+// if (emojiPicker) {
+//   emojiPicker.addEventListener('emoji-click', event => {
+//     console.log(event.detail);
+//   })
+// }
+
+// CLIENT SEND TYPING
+// if (inputChat) {
+//   inputChat.addEventListener("keyup", () => {
+//     showTyping();
+//   })
+// }
+
 
 // SERVER RETURN TYPING
 const typingListElements = document.querySelector('.chat .inner-list-typing');
