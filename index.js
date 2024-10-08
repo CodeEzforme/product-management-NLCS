@@ -7,7 +7,9 @@ const session = require("express-session");
 const moment = require("moment");
 var path = require('path');
 const http = require("http");
-const { Server } = require("socket.io");
+const {
+    Server
+} = require("socket.io");
 require('dotenv').config();
 
 const database = require("./config/database");
