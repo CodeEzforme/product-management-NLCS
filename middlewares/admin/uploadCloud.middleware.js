@@ -20,13 +20,14 @@ module.exports.uploadFields = async (req, res, next) => {
 /////////////////////////////////
 
 module.exports.upload = async (req, res, next) => {
-  if(req.file) {
+  if (req.file) {
+    console.log(1);
     const result = await uploadToCloudinary(req.file.buffer);
 
     req.body[req.file.fieldname] = result;
   }
   next();
-}
+};
 
 
 // const multer = require('multer');

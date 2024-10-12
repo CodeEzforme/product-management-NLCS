@@ -13,7 +13,6 @@ const createTree = require("../../helpers/createTree");
 module.exports.index = async (req, res) => {
     const filterStatus = filterStatusHelper(req.query);
     const objectSearch = searchHelper(req.query);
-
     let find = {
         deleted: false,
     };

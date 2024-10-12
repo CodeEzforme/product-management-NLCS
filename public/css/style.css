@@ -530,13 +530,14 @@ footer {
     align-items: center;
   }
 
+  
   .chat .inner-body .inner-images img {
-    width: 80px;
-    height: 80px;
+    width: 200px;
+    height: 200px;
     object-fit: contain;
     background: #efefef;
     padding: 10px;
-    margin: 0 5px 5px 0;
+    margin: 0 2px 2px 0;
     border-radius: 5px;
   }
 
@@ -546,7 +547,7 @@ footer {
   }
 
   .chat .inner-body .inner-outgoing .inner-images img {
-    margin: 0 0 5px 5px;
+    margin: 0 0 2px 2px;
   }
 
   .chat .inner-preview-images {

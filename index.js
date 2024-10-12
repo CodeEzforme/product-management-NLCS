@@ -60,8 +60,8 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.locals.moment = moment;
 // Hết biến toàn cục
 
-//routes
 
+//routes
 const trimInput = (req, res, next) => {
     for (let key in req.body) {
         if (typeof req.body[key] === 'string') {
@@ -70,7 +70,6 @@ const trimInput = (req, res, next) => {
     }
     next();
 }
-
 app.use(trimInput);
 routeAdmin(app);
 route(app);

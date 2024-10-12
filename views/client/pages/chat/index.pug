@@ -27,35 +27,32 @@ block main
                       img(src=image)
             div(class='inner-list-typing')
 
-          //- .inner-preview-images
-          //-   div(class='custom-file-container' data-upload-id='upload-image')
+          //- Preview container for selected images
+          .upload-images-preview
 
           .inner-foot
-            form(
-              class='inner-form'
-              action=''
-            )
-              input(
-                type='text'
-                placeholder='Type chat content...'
-                name='content'
-              )
-              //- label(
-              //-   for='file-upload-with-preview-upload-image'
-              //-   class='button-icon-img btn btn-light mx-2 mb-0'
-              //- )
-              //-   <i class="fa-regular fa-image"></i>
+            form(class='inner-form' action='' id='chat-form')
+              input(type='text' placeholder='Type chat content...' name='content')
 
-              span(class='button-icon btn btn-light mx-2')
+              label(for='file-upload-with-preview-upload-image' class='button-icon-img mx-2 mb-0')
+                i(class="fa-regular fa-image")
+                input(
+                  type='file'
+                  id='file-upload-with-preview-upload-image'
+                  class='d-none'
+                  accept='image/*'
+                  multiple
+                  name='images'
+                )
+
+              span(class='button-icon mr-2')
                 i.fa-regular.fa-face-smile
 
-              button
+              button(type='submit')
                 i.fa-solid.fa-paper-plane
 
   div(class='tooltip' role='tooltip')
     emoji-picker(class='light')
 
-  div(class='custom-file-container' data-upload-id='upload-image')
-  block script
-    script(type='module' src="/js/chat.js")
-
+block script
+  script(type='module' src="/js/chat.js")

@@ -18,11 +18,28 @@ if (buttonStatus.length > 0) {
 }
 // hết button-status
 
-// form search
+// form search bill
+const formSearchBill = document.getElementById('form-search-bill');
+if (formSearchBill) {
+    let url = new URL(window.location.href);
+    formSearchBill.addEventListener('submit', function (e) {
+        const phoneInput = this.keyword.value.replace(/\s+/g, '');
+        const phonePattern = /^\d{10,11}$/; // Quy tắc cho số điện thoại 10 hoặc 11 chữ số
+        if (!phonePattern.test(phoneInput)) {
+            e.preventDefault();
+            alert('Vui lòng nhập đúng định dạng số điện thoại (10 hoặc 11 chữ số).');
+        } else {
+            url.searchParams.set("phone", phoneInput);
+            window.location.href = url.href;
+        }
+    });
+}
+// Hết from search bill
+
+// // form search
 const formSearch = document.querySelector("#form-search");
 if (formSearch) {
     let url = new URL(window.location.href);
-
     formSearch.addEventListener("submit", (e) => {
         e.preventDefault();
         const value = e.target.elements.keyword.value;
@@ -32,11 +49,12 @@ if (formSearch) {
         } else {
             url.searchParams.delete("keyword");
         }
-
         window.location.href = url.href;
     });
 }
-// Hết from search
+// // Hết from search
+
+
 
 // Pagination
 const buttonsPagination = document.querySelectorAll("[button-pagination]");
@@ -295,8 +313,6 @@ if (sort) {
     // Het xóa sắp xếp
 
     // Hien thi mac dinh lua chon
-
-    // Het hien thi mac dinh lua chon
     const sortKey = url.searchParams.get("sortKey");
     const sortValue = url.searchParams.get("sortValue");
 
@@ -305,5 +321,6 @@ if (sort) {
         const optionSelected = sortSelect.querySelector(`option[value='${stringSort}']`);
         optionSelected.selected = true;
     }
+    // Het hien thi mac dinh lua chon
 }
 // Hết Sort

@@ -11,7 +11,8 @@ module.exports = async (req, res) => {
     socket.join(chatRoomId);
 
     socket.on('CLIENT_SEND_MESSAGE', async (data) => {
-
+      console.log("sdfsdf");
+      console.log(data);
       let images = []
       if (data.images) {
         for (const imageBuffer of data.images) {
