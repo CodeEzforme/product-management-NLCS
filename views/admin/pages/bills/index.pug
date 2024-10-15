@@ -1,14 +1,16 @@
 extends ../../layouts/default
-//- include ../../mixins/filter-status
+include ../../mixins/filter-status
 include ../../mixins/search/bill
 //- include ../../mixins/pagination
 //- include ../../mixins/change-multi
-//- include ../../mixins/alert
+include ../../mixins/alert
 include ../../mixins/sort/bill
 //- include ../../mixins/moment
 
 block main
   if(role.permissions.includes("products_view"))
+    +alert-success(5000)
+    +alert-error(5000)
     h1.mb-4 Danh sách đơn hàng
     .card.mb-3
       .card-header Tìm kiếm đơn hàng
@@ -16,6 +18,8 @@ block main
         .row
           .col-6
             +search(keyword)
+          .col-6
+            +filter-status(filterStatus)
     .card.mb-3
       .card-header Sắp xếp
       .card-body
@@ -53,9 +57,30 @@ block main
                 td= `${product.discountPercentage}%`
                 td= `${(product.price * product.quantity * (1 - product.discountPercentage / 100)).toFixed(2)}VND`
 
+        if(item.status == "active")
+          button(
+            class="badge badge-success"
+            button-change-status
+            data-status=item.status
+            data-id=item.id
+          ) Đã thanh toán
+        else
+          button(
+            class="badge badge-danger"
+            button-change-status
+            data-status=item.status
+            data-id=item.id
+          ) Chưa thanh toán
         h6
           | Ngày tạo:
           | #{new Date(item.createdAt).toLocaleString()}
         h6
           | Ngày cập nhật:
           | #{new Date(item.updatedAt).toLocaleString()}
+
+  form(
+    id="form-change-status"
+    method="POST"
+    action=""
+    data-path=`/${prefixAdmin}/bills/change-status`
+  )

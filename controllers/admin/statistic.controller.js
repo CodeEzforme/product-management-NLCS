@@ -1,5 +1,7 @@
 const Order = require("../../models/order.model");
 const Product = require("../../models/product.model");
+const Users = require('../../models/user.model');
+
 const moment = require("moment");
 
 // Hỗ trợ route [GET] /admin/statistics
@@ -99,14 +101,37 @@ module.exports.index = async (req, res) => {
 
     // Tính phần trăm doanh thu cho từng loại sản phẩm
     const percentageDataByProduct = revenueDataByProduct.map(amount => {
-        return totalRevenue > 0 ? +((amount / totalRevenue) * 100).toFixed(2) : 0;
+        return totalRevenue > 0 ? (amount / totalRevenue) * 100 : 0;
     });
+
+    const totalRounded = percentageDataByProduct.reduce((acc, val) => acc + Math.floor(val), 0);
+    const remainder = 100 - totalRounded;
+
+    const finalPercentageDataByProduct = percentageDataByProduct.map((val, index) => {
+        if (index === percentageDataByProduct.length - 1) {
+            return +(Math.floor(val) + remainder).toFixed(2); // Điều chỉnh phần tử cuối cùng
+        }
+        return +Math.floor(val).toFixed(2); // Làm tròn xuống cho các phần tử khác
+    });
+
+
+
+    const startOfMonth = moment().startOf('month').toDate();
+    const endOfMonth = moment().endOf('month').toDate();
+
+    const countUsersCreated = await Users.countDocuments({
+        createdAt: {
+          $gte: startOfMonth,
+          $lte: endOfMonth,
+        },
+      });
 
     res.render("admin/pages/statistics/index", {
         pageTitle: "Thông kê doanh thu",
         revenueData: revenueData,
         currentMonthRevenue: currentMonthRevenue,
         currentYearRevenue: currentYearRevenue,
-        revenueDataByProduct: percentageDataByProduct,
+        revenueDataByProduct: finalPercentageDataByProduct,
+        currentMonthCountUsersCreated: countUsersCreated,
     });
 };

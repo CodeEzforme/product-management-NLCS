@@ -1,0 +1,36 @@
+.color-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .text-chaluacotieu {
+    background-color: #4e73df;
+  }
+  
+  .text-chaluakhongtieu {
+    background-color: #8aaae8;
+  }
+  
+  .text-chagancotieu {
+    background-color: #1cc88a;
+  }
+  
+  .text-chagankhongtieu {
+    background-color: #77deb9;
+  }
+  
+  .text-nemchua {
+    background-color: #f7d711;
+  }
+  
+  .text-pate {
+    background-color: orange;
+  }
+  
+  .text-khac {
+    background-color: #E74A3B;
+  }
+  

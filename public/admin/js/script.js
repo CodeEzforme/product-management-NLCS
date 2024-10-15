@@ -25,7 +25,7 @@ if (formSearchBill) {
     let url = new URL(window.location.href);
     formSearchBill.addEventListener('submit', function (e) {
         const phoneInput = this.keyword.value.replace(/\s+/g, '');
-        const phonePattern = /^\d{1,11}$/; // Cho phép từ 1 đến 10 chữ số
+        const phonePattern = /^\d{0,11}$/; // Cho phép từ 1 đến 10 chữ số
         if (!phonePattern.test(phoneInput)) {
             e.preventDefault();
             alert('Vui lòng nhập số điện thoại hợp lệ (tối đa 11 chữ số).');

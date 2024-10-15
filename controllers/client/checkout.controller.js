@@ -115,7 +115,6 @@ module.exports.orderPost = async (req, res) => {
 
     }
 
-
     const order = new Order({
       cart_id: cartId,
       userInfo: userInfo,
