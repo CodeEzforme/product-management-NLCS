@@ -18,16 +18,17 @@ if (buttonStatus.length > 0) {
 }
 // hết button-status
 
+
 // form search bill
 const formSearchBill = document.getElementById('form-search-bill');
 if (formSearchBill) {
     let url = new URL(window.location.href);
     formSearchBill.addEventListener('submit', function (e) {
         const phoneInput = this.keyword.value.replace(/\s+/g, '');
-        const phonePattern = /^\d{10,11}$/; // Quy tắc cho số điện thoại 10 hoặc 11 chữ số
+        const phonePattern = /^\d{1,11}$/; // Cho phép từ 1 đến 10 chữ số
         if (!phonePattern.test(phoneInput)) {
             e.preventDefault();
-            alert('Vui lòng nhập đúng định dạng số điện thoại (10 hoặc 11 chữ số).');
+            alert('Vui lòng nhập số điện thoại hợp lệ (tối đa 11 chữ số).');
         } else {
             url.searchParams.set("phone", phoneInput);
             window.location.href = url.href;
@@ -35,6 +36,7 @@ if (formSearchBill) {
     });
 }
 // Hết from search bill
+
 
 // // form search
 const formSearch = document.querySelector("#form-search");
@@ -55,7 +57,6 @@ if (formSearch) {
 // // Hết from search
 
 
-
 // Pagination
 const buttonsPagination = document.querySelectorAll("[button-pagination]");
 if (buttonsPagination.length > 0) {
@@ -72,6 +73,7 @@ if (buttonsPagination.length > 0) {
     });
 }
 //  Hết Pagination
+
 
 // change Status
 const buttonsChangeStatus = document.querySelectorAll("[button-change-status]");
@@ -96,6 +98,7 @@ if (buttonsChangeStatus.length > 0) {
     });
 }
 // Hết change Status
+
 
 // checkbox Multi
 const checkboxMulti = document.querySelector("[checkbox-multi]");
@@ -130,6 +133,7 @@ if (checkboxMulti) {
     });
 }
 // Hết checkbox Multi
+
 
 // form-change-multi
 const formChangeMulti = document.querySelector("[form-change-multi]");
@@ -177,6 +181,7 @@ if (formChangeMulti) {
 }
 // Hết form-change-multi
 
+
 // Xóa sản phẩm
 const buttonsDelete = document.querySelectorAll("[button-delete]");
 if (buttonsDelete.length > 0) {
@@ -202,6 +207,7 @@ if (buttonsDelete.length > 0) {
 }
 // Hết Xóa sản phẩm
 
+
 // Show Alert
 const showAlert = document.querySelector("[show-alert]");
 if (showAlert) {
@@ -225,11 +231,7 @@ if (showAlert) {
 //     maxFileCount: 8
 // });
 // const uploadImageInput = document.querySelector("[upload-image-input]");
-
-// Hêt FileUploadWithPreview
-
-// console.log(upload);
-
+// Hết FileUploadWithPreview
 
 
 // Upload nhiều ảnh
@@ -269,7 +271,6 @@ if (uploadAudio) {
 // Hết upload Audio
 
 
-
 // Upload ảnh
 const uploadImage = document.querySelector("[upload-image]");
 if (uploadImage) {
@@ -284,6 +285,7 @@ if (uploadImage) {
     })
 };
 // Hết upload ảnh
+
 
 // Sort
 const sort = document.querySelector("[sort]");

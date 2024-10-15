@@ -49,9 +49,9 @@ block main
               tr
                 td= product.product_id
                 td= product.quantity
-                td= `$${product.price.toFixed(2)}`
+                td= `${product.price.toFixed(2)}VND`
                 td= `${product.discountPercentage}%`
-                td= `$${(product.price * product.quantity * (1 - product.discountPercentage / 100)).toFixed(2)}`
+                td= `${(product.price * product.quantity * (1 - product.discountPercentage / 100)).toFixed(2)}VND`
 
         h6
           | Ngày tạo:

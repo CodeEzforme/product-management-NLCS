@@ -6,13 +6,13 @@ block main
       h1(class="mb-4") #{product.title}
 
     if (product.price)
-      div(class="mb-4") Giá: <b>#{product.price}$</b>
+      div(class="mb-4") Giá: <b>#{product.price.toLocaleString()} VND</b>
 
     if (product.discountPercentage)
       div(class="mb-4") Giảm giá: <b>#{product.discountPercentage}%</b>
 
     if (product.stock)
-      div(class="mb-4") Còn lại: <b>#{product.stock}</b>
+      div(class="mb-4") Còn lại: <b>#{product.stock.toLocaleString()}</b>
 
     if (product.thumbnail)
       div(class="mb-4")

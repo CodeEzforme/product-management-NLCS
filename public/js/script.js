@@ -31,5 +31,19 @@ if (buttonsPagination.length > 0) {
 }
 //  Hết Pagination
 
+// form checkout order
+const phoneInputField = document.getElementById('phone');
+if(phoneInputField){
+    // Bắt sự kiện khi người dùng rời khỏi ô input số điện thoại (hoặc khi nhập)
+    phoneInputField.addEventListener('blur', function () {
+        const phoneInput = this.value.replace(/\s+/g, ''); // Xoá khoảng trắng
+        const phonePattern = /^\d{10,11}$/;
+        if (!phonePattern.test(phoneInput)) {
+            alert('Số điện thoại không hợp lệ. Vui lòng nhập lại (10 hoặc 11 chữ số).');
+        }
+    });
+}
+// End form checkout order
+
 /// đăng ký annimation
 document.querySelector('.user')?.classList.add('active'); // Thêm lớp active
