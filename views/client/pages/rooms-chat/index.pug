@@ -1,96 +1,33 @@
-//- //- h1 Tính năng đang được cập nhật!
-//- //- button(
-//- //-   onclick='history.back()'
-//- //- ) Trở lại
+
 //- extends ../../layouts/default.pug
 //- include ../../mixins/box-head.pug
 
 //- block main
 //-   .container.my-3
-
-//-     //- include ../../partials/list-user-buttons.pug
+//-     .row
+//-       .col-12
+//-         +box-head('Danh sách phòng chat')
 
 //-     .row
 //-       .col-12
-//-         +box-head('Chat')
+//-         a(
+//-           href='/rooms-chat/create'
+//-           class='btn btn-sm btn-success mr-1'
+//-         ) Tạo phòng chat
 
 //-     .row
-//-       .col-12
-//-         .chat(my-id=user.id)
-//-           .inner-body
-//-             each chat in chats
-//-               div(class=(chat.userInfo.id == user.id ? 'inner-outgoing' : 'inner-incoming'))
-//-                 if(chat.userInfo.id != user.id)
-//-                   .inner-name #{chat.userInfo.fullName}
-//-                 if(chat.content)
-//-                   .inner-content
-//-                     | #{chat.content}
-//-                 if(chat.images)
-//-                   .inner-images
-//-                     each image in chat.images
-//-                       img(src=image)
-//-             div(class='inner-list-typing')
-
-//-           .inner-preview-images
-//-             div(class='custom-file-container' data-upload-id='upload-image')
-
-//-           .inner-foot
-//-             form(
-//-               class='inner-form'
-//-               action=''
-//-             )
-//-               input(
-//-                 type='text'
-//-                 placeholder='Type chat content...'
-//-                 name='content'
+//-       each room in listRoomChat
+//-         .col-6
+//-           div(class='box-room')
+//-             div(class='inner-avatar')
+//-               img(
+//-                 src='https://robohash.org/hicveldicta.png'
+//-                 alt=room.title
 //-               )
-
-//-                 //-   label(
-//-                 //-     for='file-upload-with-preview-upload-image'
-//-                 //-     class='button-icon-img mx-2 mb-0'
-//-                 //-   )
-//-                 //-     <i class="fa-regular fa-image"></i>
-//-                 //-   span(class='button-icon mr-2')
-//-                 //-     i.fa-regular.fa-face-smile
-
-//-               button
-//-                 i.fa-solid.fa-paper-plane
-
-//- //-   div(class='tooltip' role='tooltip')
-//- //-     emoji-picker(class='light')
-
-//- //-   block script
-//- //-     script(type='module' src="/js/chat.js")
-
-extends ../../layouts/default.pug
-include ../../mixins/box-head.pug
-
-block main
-  .container.my-3
-    .row
-      .col-12
-        +box-head('Danh sách phòng chat')
-
-    .row
-      .col-12
-        a(
-          href='/rooms-chat/create'
-          class='btn btn-sm btn-success mr-1'
-        ) Tạo phòng chat
-
-    .row
-      each room in listRoomChat
-        .col-6
-          div(class='box-room')
-            div(class='inner-avatar')
-              img(
-                src='https://robohash.org/hicveldicta.png'
-                alt=room.title
-              )
-            div(class='inner-info')
-              div(class='inner-name') #{room.title}
-              div(class='inner-buttons')
-              a(
-                href=`/chat/${room.id}`
-                class='btn btn-sm btn-primary mr-1'
-              ) Nhắn tin
+//-             div(class='inner-info')
+//-               div(class='inner-name') #{room.title}
+//-               div(class='inner-buttons')
+//-               a(
+//-                 href=`/chat/${room.id}`
+//-                 class='btn btn-sm btn-primary mr-1'
+//-               ) Nhắn tin
