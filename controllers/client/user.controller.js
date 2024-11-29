@@ -1,5 +1,6 @@
 const Users = require('../../models/user.model')
 const Cart = require('../../models/cart.model')
+const ChatRoom = require('../../models/room-chat.model');
 
 const ForgotPassword = require('../../models/forgot-password.model')
 
@@ -140,7 +141,6 @@ module.exports.editPatch = async (req, res) => {
         }
 
         const tokenUser = req.cookies.tokenUser;
-        console.log(tokenUser);
         await Users.updateOne({
             tokenUser: tokenUser
         }, {
@@ -176,12 +176,82 @@ module.exports.registerPost = async (req, res) => {
             return;
         }
 
+
         req.body.password = md5(req.body.password);
 
         const newUser = new Users(req.body);
         await newUser.save();
-
         console.log(newUser);
+        ///// kết bạn với Shop chả lụa Tùng Loan///////////////////////////////////
+        const currentUserId = newUser._id;
+        const otherUserId = '6744179aa20cbe4e88a69bf4'
+        // const currentUserExisted = await Users.findOne({
+        //     _id: currentUserId,
+        //     acceptFriends: otherUserId
+        // })
+
+        // const otherUserExisted = await Users.findOne({
+        //     _id: otherUserId,
+        //     requestFriends: currentUserId
+        // })
+
+        // // create chat room
+        let chatRoom;
+
+        // if (currentUserExisted && otherUserExisted) {
+        chatRoom = new ChatRoom({
+            roomType: 'friend',
+            users: [{
+                    user_id: currentUserId,
+                    role: 'superAdmin'
+                },
+                {
+                    user_id: otherUserId,
+                    role: 'superAdmin'
+                }
+            ]
+        });
+
+        await chatRoom.save();
+        // }
+
+
+        // if (currentUserExisted) {
+        await Users.updateOne({
+            _id: currentUserId
+        }, {
+            $push: {
+                friendList: {
+                    user_id: otherUserId,
+                    room_chat_id: chatRoom.id
+                }
+            },
+            // $pull: {
+            //     acceptFriends: otherUserId
+            // }
+        })
+        // }
+
+        // // Add {user_id, room_chat_id } of CURRENT USER to friendList of OTHER USER
+        // // Remove id of CURRENT USER in acceptFriends field of OTHER USER
+
+        // if (otherUserExisted) {
+        await Users.updateOne({
+            _id: otherUserId
+        }, {
+            $push: {
+                friendList: {
+                    user_id: currentUserId,
+                    room_chat_id: chatRoom.id
+                }
+            },
+            // $pull: {
+            //     acceptFriends: currentUserId
+            // }
+        })
+        // }
+        ///// Hết kết bạn với Shop chả lụa Tùng Loan///////////////////////////
+
         req.flash('success', "Tạo tài khoản thành công!");
         res.cookie('tokenUser', newUser.tokenUser);
         res.redirect('/');

@@ -1,58 +1,58 @@
-//- extends ../../layouts/default.pug
-//- include ../../mixins/box-head.pug
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
 
-//- block main
-//-   .container.my-3
+block main
+  .container.my-3
 
-//-     include ../../partials/list-user-buttons.pug
+    include ../../partials/list-user-buttons.pug
 
-//-     .row
-//-       .col-12
-//-         +box-head('Chat')
+    .row
+      .col-12
+        +box-head('Chat')
 
-//-     .row
-//-       .col-12
-//-         .chat(my-id=user.id)
-//-           .inner-body
-//-             each chat in chats
-//-               div(class=(chat.userInfo.id == user.id ? 'inner-outgoing' : 'inner-incoming'))
-//-                 if(chat.userInfo.id != user.id)
-//-                   .inner-name #{chat.userInfo.fullName}
-//-                 if(chat.content)
-//-                   .inner-content
-//-                     | #{chat.content}
-//-                 if(chat.images)
-//-                   .inner-images
-//-                     each image in chat.images
-//-                       img(src=image)
-//-             div(class='inner-list-typing')
+    .row
+      .col-12
+        .chat(my-id=user.id)
+          .inner-body
+            each chat in chats
+              div(class=(chat.userInfo.id == user.id ? 'inner-outgoing' : 'inner-incoming'))
+                if(chat.userInfo.id != user.id)
+                  .inner-name #{chat.userInfo.fullName}
+                if(chat.content)
+                  .inner-content
+                    | #{chat.content}
+                if(chat.images)
+                  .inner-images
+                    each image in chat.images
+                      img(src=image)
+            div(class='inner-list-typing')
 
-//-           //- Preview container for selected images
-//-           .upload-images-preview
+          //- Preview container for selected images
+          .upload-images-preview
 
-//-           .inner-foot
-//-             form(class='inner-form' action='' id='chat-form')
-//-               input(type='text' placeholder='Type chat content...' name='content')
+          .inner-foot
+            form(class='inner-form' action='' id='chat-form')
+              input(type='text' placeholder='Type chat content...' name='content')
 
-//-               label(for='file-upload-with-preview-upload-image' class='button-icon-img mx-2 mb-0')
-//-                 i(class="fa-regular fa-image")
-//-                 input(
-//-                   type='file'
-//-                   id='file-upload-with-preview-upload-image'
-//-                   class='d-none'
-//-                   accept='image/*'
-//-                   multiple
-//-                   name='images'
-//-                 )
+              label(for='file-upload-with-preview-upload-image' class='button-icon-img mx-2 mb-0')
+                i(class="fa-regular fa-image")
+                input(
+                  type='file'
+                  id='file-upload-with-preview-upload-image'
+                  class='d-none'
+                  accept='image/*'
+                  multiple
+                  name='images'
+                )
 
-//-               span(class='button-icon mr-2')
-//-                 i.fa-regular.fa-face-smile
+              span(class='button-icon mr-2')
+                i.fa-regular.fa-face-smile
 
-//-               button(type='submit')
-//-                 i.fa-solid.fa-paper-plane
+              button(type='submit')
+                i.fa-solid.fa-paper-plane
 
-//-   div(class='tooltip' role='tooltip')
-//-     emoji-picker(class='light')
+  div(class='tooltip' role='tooltip')
+    emoji-picker(class='light')
 
-//- block script
-//-   script(type='module' src="/js/chat.js")
+block script
+  script(type='module' src="/js/chat.js")

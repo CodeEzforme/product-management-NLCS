@@ -23,6 +23,14 @@ const acceptFriend = (btn) => {
     })
 }
 
+// const acceptFriend = (btn) => {
+//     btn.addEventListener('click', () => {
+//         btn.closest('.box-user').classList.add('accepted');
+//         const userId = btn.getAttribute('btn-accept-friend');
+//         socket.emit('CLIENT_ACCEPT_FRIEND', userId);
+//     })
+// }
+
 // display online status badget real time (friends list page)
 const onlineBadgeDisplay = (onlineStatus, userId) => {
     const dataUsersFriend = document.querySelector('[data-users-friend]');

@@ -12,14 +12,22 @@ module.exports.notFriend = async (req, res) => {
     const currentUser = await Users.findOne({
       _id: currentUserId
     })
-
+    const friendList = currentUser.friendList;
     const acceptFriendList = currentUser.acceptFriends;
     const requestFriendList = currentUser.requestFriends;
+
+    // Lấy danh sách user_id từ friendList
+    const friendUserIds = friendList.map(friend => friend.user_id);
 
     const users = await Users.find({
       $and: [{
           _id: {
             $ne: currentUserId
+          }
+        },
+        {
+          _id: {
+            $nin: friendUserIds
           }
         },
         {
@@ -128,7 +136,9 @@ module.exports.friends = async (req, res) => {
     const friendListId = friendList.map(item => item.user_id)
 
     const users = await Users.find({
-      _id: { $in: friendListId },
+      _id: {
+        $in: friendListId
+      },
       status: 'active',
       deleted: false
     }).select('id fullName avatar onlineStatus');
