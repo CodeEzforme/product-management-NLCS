@@ -20,6 +20,7 @@ database.connect();
 const routeAdmin = require("./routes/admin/index.route");
 const route = require("./routes/client/index.route");
 
+
 const app = express();
 const port = process.env.PORT;
 
@@ -71,6 +72,46 @@ const trimInput = (req, res, next) => {
     next();
 }
 app.use(trimInput);
+// // ///////////////////////////////////////////test connect server routes//////////////////////////////////////////
+// const testConnection = () => {
+//     const options = {
+//         hostname: '127.0.0.1',
+//         port: 8000,
+//         path: '/items/',
+//         method: 'GET'
+//     };
+
+//     const req = http.request(options, (res) => {
+//         let data = '';
+
+//         console.log(`Status Code: ${res.statusCode}`); // Log mã trạng thái HTTP
+
+//         res.on('data', (chunk) => {
+//             // console.log('Received chunk:', chunk.toString()); // Log từng phần dữ liệu
+//             data += chunk;
+//         });
+
+//         res.on('end', () => {
+//             // console.log('Raw Data:', data || 'No data received'); // Log dữ liệu thô
+//             try {
+//                 const parsedData = JSON.parse(data);
+//                 console.log('Parsed JSON Data:', parsedData);
+//             } catch (error) {
+//                 console.error('Error parsing JSON:', error.message);
+//             }
+//         });
+//     });
+
+//     req.on('error', (error) => {
+//         console.error('Error connecting to Django API:', error.message);
+//     });
+
+//     req.end();
+// };
+
+// testConnection();
+// // ///////////////////////////////////////////test connect server routes//////////////////////////////////////////
+
 routeAdmin(app);
 route(app);
 

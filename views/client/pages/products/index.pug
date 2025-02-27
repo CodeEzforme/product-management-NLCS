@@ -3,6 +3,7 @@ include ../../mixins/box-head
 include ../../mixins/alert.pug
 include ../../mixins/product-layout.pug
 include ../../mixins/pagination
+include ../../mixins/box-chat.pug
 
 block main
   +alert-success(3000)
@@ -16,3 +17,5 @@ block main
     .row
       .col-6
       +pagination(pagination)
+  //- Sử dụng Chatbox Mixin
+  +chatbox()

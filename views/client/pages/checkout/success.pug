@@ -55,9 +55,9 @@ block main
                         width='80px'
                       )
                     td #{item.productInfo.title}
-                    td #{item.newPrice}$
+                    td #{Number(item.newPrice).toLocaleString()}VND
                     td #{item.quantity}
-                    td #{item.totalPrice}$
+                    td #{Number(item.totalPrice).toLocaleString()}VND
 
           if(order.products.length > 0)
-            h3(class='text-right') Tổng thanh toán: #{order.totalPrice}$
+            h3(class='text-right') Tổng thanh toán: #{Number(order.totalPrice).toLocaleString()}VND

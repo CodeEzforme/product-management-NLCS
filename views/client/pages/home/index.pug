@@ -1,18 +1,45 @@
+//- extends ../../layouts/default.pug
+//- include ../../mixins/box-head.pug
+//- include ../../mixins/product-layout.pug
+//- include ../../mixins/alert.pug
+
+
+//- block main
+//-     +alert-error(3000)
+//-     +alert-success(3000)
+//-     .section-products-featured.my-5
+//-         .container
+//-             .row
+//-                 .col-12
+//-                     +box-head("Sản phẩm nổi bật")
+
+//-             +product-grid(featuredProducts)
+
+//-     .section-products-new.my-5
+//-         .container
+//-             .row
+//-                 .col-12
+//-                     +box-head("Sản phẩm mới")
+
+//-             +product-grid(newProducts)
+
+//- #code mới
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 include ../../mixins/product-layout.pug
 include ../../mixins/alert.pug
-
+include ../../mixins/box-chat.pug
 
 block main
     +alert-error(3000)
     +alert-success(3000)
+
+    //- Nội dung sản phẩm
     .section-products-featured.my-5
         .container
             .row
                 .col-12
                     +box-head("Sản phẩm nổi bật")
-
             +product-grid(featuredProducts)
 
     .section-products-new.my-5
@@ -20,5 +47,180 @@ block main
             .row
                 .col-12
                     +box-head("Sản phẩm mới")
-
             +product-grid(newProducts)
+
+    //- Sử dụng Chatbox Mixin
+    +chatbox()
+
+    //- //- CSS Chatbox
+    //- style.
+    //-     /* Chatbox Wrapper */
+    //-     .chatbox-wrapper {
+    //-         /* Chat Bubble */
+    //-         #chatbot-bubble {
+    //-             position: fixed;
+    //-             bottom: 20px;
+    //-             right: 20px;
+    //-             background-color: #4f46e5;
+    //-             color: white;
+    //-             border-radius: 50%;
+    //-             width: 60px;
+    //-             height: 60px;
+    //-             display: flex;
+    //-             justify-content: center;
+    //-             align-items: center;
+    //-             cursor: pointer;
+    //-             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    //-             z-index: 1000;
+    //-         }
+
+    //-         #chatbot-bubble:hover {
+    //-             background-color: #4338ca;
+    //-         }
+
+    //-         /* Chat Box */
+    //-         #chatbot-box {
+    //-             position: fixed;
+    //-             bottom: 90px;
+    //-             right: 20px;
+    //-             width: 320px;
+    //-             border-radius: 8px;
+    //-             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    //-             background-color: #fff;
+    //-             display: flex;
+    //-             flex-direction: column;
+    //-             z-index: 1000;
+    //-             transition: opacity 0.3s ease;
+    //-             opacity: 1;
+    //-         }
+
+    //-         /* Ẩn chatbox mặc định */
+    //-         .hidden {
+    //-             display: none !important;
+    //-             opacity: 0;
+    //-         }
+
+    //-         /* Chat Header */
+    //-         .chat-header {
+    //-             background-color: #4f46e5;
+    //-             color: white;
+    //-             padding: 12px;
+    //-             border-top-left-radius: 8px;
+    //-             border-top-right-radius: 8px;
+    //-             display: flex;
+    //-             justify-content: space-between;
+    //-             align-items: center;
+    //-         }
+
+    //-         #chatbot-close {
+    //-             cursor: pointer;
+    //-             z-index: 9999;
+    //-         }
+
+    //-         /* Chat Body */
+    //-         .chat-body {
+    //-             max-height: 300px;
+    //-             overflow-y: auto;
+    //-             padding: 10px;
+    //-             font-size: 14px;
+    //-         }
+
+    //-         /* Chat Footer */
+    //-         .chat-footer {
+    //-             display: flex;
+    //-             padding: 10px;
+    //-             border-top: 1px solid #e5e7eb;
+    //-         }
+
+    //-         .chat-footer input {
+    //-             flex: 1;
+    //-             border: 1px solid #e5e7eb;
+    //-             border-radius: 20px;
+    //-             padding: 8px 12px;
+    //-             outline: none;
+    //-         }
+
+    //-         .chat-footer button {
+    //-             background-color: #4f46e5;
+    //-             border: none;
+    //-             color: white;
+    //-             border-radius: 50%;
+    //-             width: 36px;
+    //-             height: 36px;
+    //-             margin-left: 8px;
+    //-             cursor: pointer;
+    //-         }
+
+    //-         /* Message Styles */
+    //-         .message {
+    //-             margin: 8px 0;
+    //-             padding: 10px;
+    //-             border-radius: 8px;
+    //-             max-width: 80%;
+    //-         }
+
+    //-         .bot {
+    //-             background-color: #f3f4f6;
+    //-             align-self: flex-start;
+    //-         }
+
+    //-         .user {
+    //-             background-color: #4f46e5;
+    //-             color: white;
+    //-             align-self: flex-end;
+    //-         }
+    //-     }
+
+    //- JavaScript Chatbox
+    //- script.
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.querySelector('.chatbox-wrapper'); // Wrapper định danh
+            const chatBubble = wrapper.querySelector('#chatbot-bubble'); 
+            const chatBox = wrapper.querySelector('#chatbot-box');       
+            const chatClose = wrapper.querySelector('#chatbot-close');   
+            const sendBtn = wrapper.querySelector('#send-btn');
+            const chatInput = wrapper.querySelector('#chat-input');
+            const chatBody = wrapper.querySelector('.chat-body');
+
+            // Mở Chatbox khi nhấn nút tròn nhỏ
+            chatBubble.addEventListener('click', () => {
+                chatBox.classList.remove('hidden');
+                chatBubble.classList.add('hidden');
+            });
+
+            // Đóng Chatbox và hiện lại nút tròn nhỏ
+            chatClose.addEventListener('click', () => {
+                chatBox.classList.add('hidden');
+                chatBubble.classList.remove('hidden');
+            });
+
+            // Gửi tin nhắn
+            sendBtn.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            function sendMessage() {
+                const msg = chatInput.value.trim();
+                if (msg === '') return;
+
+                // Tin nhắn người dùng
+                const userMsg = document.createElement('div');
+                userMsg.className = 'message user';
+                userMsg.textContent = msg;
+                chatBody.appendChild(userMsg);
+
+                chatInput.value = '';
+
+                // Bot trả lời tự động
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'message bot';
+                    botMsg.textContent = '🤖 This is a bot reply!';
+                    chatBody.appendChild(botMsg);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 500);
+
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        });

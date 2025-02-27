@@ -34,9 +34,9 @@ block main
                       width="80px"
                     )
                   td(class="mid-pos") #{item.productInfo.title}
-                  td(class="mid-pos") #{item.productInfo.newPrice} $
+                  td(class="mid-pos") #{Number(item.productInfo.newPrice).toLocaleString()}VND
                   td(class="mid-pos") #{item.quantity}
-                  td(class="mid-pos font-weight-bold") #{item.totalPrice} $
+                  td(class="mid-pos font-weight-bold") #{Number(item.totalPrice).toLocaleString()}VND
             else
               tr
                 td(
@@ -45,7 +45,7 @@ block main
                   class="text-center"
                 ) Giỏ hàng trống!
         if(cartDetail.products.length > 0)
-          h3(class="text-right mt-20") Tổng thanh toán: #{cartDetail.totalPrice}$
+          h3(class="text-right mt-20") Tổng thanh toán: #{Number(cartDetail.totalPrice).toLocaleString()}VND
 
 
     if(cartDetail.products.length > 0)

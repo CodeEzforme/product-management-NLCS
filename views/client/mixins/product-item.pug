@@ -13,9 +13,9 @@ mixin product-item(product)
         div(class="container")
           div(class="row")
             div(class="col")
-              .inner-price-new #{product.newPrice}đ
+              .inner-price-new #{Number(product.newPrice).toLocaleString()}VND
             div(class="col")
-              .inner-price-old #{product.price}đ
+              .inner-price-old #{product.price.toLocaleString()}VND
 
           div(class="row")
             div(class="col-md-3")

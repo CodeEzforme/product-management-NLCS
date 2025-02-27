@@ -1,0 +1,28 @@
+//- mixins/chatbox.pug
+mixin chatbox()
+    .chatbox-wrapper
+        #chatbot-container
+            #chatbot-bubble
+                i.fas.fa-comment-alt
+
+            #chatbot-box.hidden
+                .resize-handle
+
+                .chat-header
+                    | Chatbot 🤖
+                    i.fas.fa-times#chatbot-close
+
+                .chat-body-wrapper
+                    .chat-body
+                        .message.bot
+                            | Hey there 👋 How can I help you today?
+
+                    #image-preview
+
+                .chat-footer
+                    input(type="file", id="image-upload", accept="image/*", style="display: none")
+                    label(for="image-upload")
+                        i.fas.fa-paperclip(style="cursor: pointer; margin-right: 5px;")
+                    input(type="text", placeholder="Type a message..." id="chat-input")
+                    button#send-btn
+                        i.fas.fa-paper-plane

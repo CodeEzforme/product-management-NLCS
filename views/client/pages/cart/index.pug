@@ -31,7 +31,7 @@ block main
                     img(src=item.productInfo.thumbnail[0], alt=item.productInfo.title width="80px")
                   td(class='mid-pos')
                     a(href=`/products/detail/${item.productInfo.slug}`) #{item.productInfo.title}
-                  td(class='mid-pos') #{item.productInfo.newPrice}$
+                  td(class='mid-pos') #{Number(item.productInfo.newPrice).toLocaleString()}VND
                   td(class='mid-pos')
                     input(
                       type="number"
@@ -41,7 +41,7 @@ block main
                       product-id=item.product_id
                       style="width: 55px; text-align: center"
                     )
-                  td(class='mid-pos') #{item.totalPrice}$
+                  td(class='mid-pos') #{Number(item.totalPrice).toLocaleString()}VND
                   td(class='mid-pos')
                     a(
                       href=`/cart/delete/${item.product_id}`
@@ -55,7 +55,7 @@ block main
                   class="text-center"
                 ) Không có sản phẩm trong giỏ hàng !
 
-        h3(class="text-right") Tổng: #{cartDetail.totalPrice}$
+        h3(class="text-right") Tổng: #{Number(cartDetail.totalPrice).toLocaleString()}VND
 
         div(class="text-right mt-3")
           a(href="/checkout" class="btn btn-success") Thanh toán

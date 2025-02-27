@@ -25,6 +25,7 @@ imageInput.addEventListener('change', function (event) {
       previewDiv.style.position = 'relative';
       previewDiv.style.display = 'inline-block';
       previewDiv.style.margin = '5px';
+      previewDiv.style.backgroundColor = '#f9f9f9';
 
       // Tạo ảnh preview
       const img = document.createElement('img');
