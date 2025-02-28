@@ -308,13 +308,21 @@ function showFakeMessage() {
 }
 
 // ✅ Lặp lại hiệu ứng và thông báo mỗi 10 giây (chỉ khi chatbox đóng)
+// setInterval(() => {
+//     const chatbox = document.getElementById('chatbot-box');
+//     if (chatbox.classList.contains('hidden')) {
+//         triggerShake();
+//         showFakeMessage();
+//     }
+// }, 10000);
 setInterval(() => {
     const chatbox = document.getElementById('chatbot-box');
-    if (chatbox.classList.contains('hidden')) {
+    if (chatbox && chatbox.classList.contains('hidden')) { // ✅ Kiểm tra chatbox có tồn tại không trước khi truy cập classList
         triggerShake();
         showFakeMessage();
     }
 }, 10000);
+
 
 // ✅ Đảm bảo thông báo biến mất khi mở chatbox và thêm toàn bộ sự kiện trong một DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -423,23 +431,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ✅ Chọn và Preview Ảnh
-    imageUpload.addEventListener('change', (e) => {
+    // imageUpload.addEventListener('change', (e) => {
+    //     selectedImage = e.target.files[0];
+    //     const imagePreview = document.getElementById('image-preview');
+
+    //     if (selectedImage) {
+    //         const imgPreview = document.createElement('img');
+    //         imgPreview.src = URL.createObjectURL(selectedImage);
+    //         imgPreview.style.maxWidth = '100%';
+    //         imgPreview.style.borderRadius = '5px';
+
+    //         imagePreview.innerHTML = ''; // Xóa preview cũ nếu có
+    //         imagePreview.appendChild(imgPreview);
+    //         imagePreview.style.display = 'flex'; // ✅ Hiện preview khi có ảnh
+    //     } else {
+    //         imagePreview.style.display = 'none'; // ✅ Ẩn khi không có ảnh
+    //     }
+    // });
+
+    imageUpload.addEventListener("change", (e) => {
         selectedImage = e.target.files[0];
-        const imagePreview = document.getElementById('image-preview');
-
+        const imagePreview = document.getElementById("image-preview");
+    
         if (selectedImage) {
-            const imgPreview = document.createElement('img');
+            const imgPreview = document.createElement("img");
+    
+            // ✅ Hiển thị ảnh tạm thời trước khi upload
             imgPreview.src = URL.createObjectURL(selectedImage);
-            imgPreview.style.maxWidth = '100%';
-            imgPreview.style.borderRadius = '5px';
-
-            imagePreview.innerHTML = ''; // Xóa preview cũ nếu có
+            imgPreview.style.maxWidth = "100%";
+            imgPreview.style.borderRadius = "5px";
+    
+            imagePreview.innerHTML = ""; // Xóa preview cũ nếu có
             imagePreview.appendChild(imgPreview);
-            imagePreview.style.display = 'flex'; // ✅ Hiện preview khi có ảnh
+            imagePreview.style.display = "flex"; // ✅ Hiện preview khi có ảnh
         } else {
-            imagePreview.style.display = 'none'; // ✅ Ẩn khi không có ảnh
+            imagePreview.style.display = "none"; // ✅ Ẩn khi không có ảnh
         }
     });
+
 
     // ✅ Gửi Tin Nhắn
     sendBtn.addEventListener('click', sendMessage);
@@ -467,6 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
             imgInChat.style.borderRadius = '5px';
             userMsg.appendChild(imgInChat);
         }
+        
 
         chatInput.value = '';
         chatBody.scrollTop = chatBody.scrollHeight;
@@ -481,10 +511,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // fetch('http://127.0.0.1:8000/chat/', {
         fetch('https://a22d-2402-800-6315-c363-3c16-e730-b8e2-9a9b.ngrok-free.app/chat/',{
             method: 'POST',
-            headers: {
-                'ngrok-skip-browser-warning': 'true'  // Bỏ qua cảnh báo ngrok
-                // 'Content-Type': 'application/json'
-            },
+            // headers: {
+            //     'ngrok-skip-browser-warning': 'true'  // Bỏ qua cảnh báo ngrok
+            //     // 'Content-Type': 'application/json'
+            // },
             body: formData
         })
         .then(response => response.json().then(data => ({ status: response.status, body: data })))
