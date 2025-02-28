@@ -8,7 +8,9 @@ module.exports.uploadFields = async (req, res, next) => {
     for (const item of array) {
       try {
         const result = await uploadToCloudinary(item.buffer);
-        req.body[key].push(result);
+        const secureResult = result.startsWith("http://") ? result.replace("http://", "https://") : result;
+        req.body[key].push(secureResult);  // ✅ Luôn lưu HTTPS vào database hoặc response
+        // req.body[key].push(result);
       } catch (error) {
         console.log(error);
       }
@@ -23,8 +25,8 @@ module.exports.upload = async (req, res, next) => {
   if (req.file) {
     console.log(1);
     const result = await uploadToCloudinary(req.file.buffer);
-
-    req.body[req.file.fieldname] = result;
+    req.body[req.file.fieldname] = result.startsWith("http://") ? result.replace("http://", "https://") : result;  // ✅ Luôn lưu HTTPS
+    // req.body[req.file.fieldname] = result;
   }
   next();
 };
