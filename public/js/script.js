@@ -478,7 +478,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // kết nối sever
-        fetch('http://127.0.0.1:8000/chat/', {
+        // fetch('http://127.0.0.1:8000/chat/', {
+        fetch('https://a22d-2402-800-6315-c363-3c16-e730-b8e2-9a9b.ngrok-free.app/chat/',{
             method: 'POST',
             body: formData
         })
