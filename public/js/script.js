@@ -343,6 +343,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let offset = { x: 0, y: 0 };
     let animationFrameId;
 
+    if (!chatBubble || !chatbox) {
+        console.warn("⚠️ Không tìm thấy chatbox hoặc chatBubble trên trang này.");
+        return; // ❌ Dừng script nếu không có chatbox
+    }
     // ✅ Mở Chatbox
     chatBubble.addEventListener('click', () => {
         chatbox.classList.remove('hidden');
