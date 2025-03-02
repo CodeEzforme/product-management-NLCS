@@ -25,9 +25,10 @@ const route = require("./routes/client/index.route");
 const app = express();
 const port = process.env.PORT;
 
+app.use(cors());
 app.use(express.json()); // ✅ Cần có dòng này để parse JSON từ request body
 app.use(express.urlencoded({ extended: true })); // ✅ Hỗ trợ dữ liệu form
-const ngrokRoutes = require("./routes/client/ngrok"); // Đúng đường dẫn
+const ngrokRoutes = require("./routes/ngrok"); // Đúng đường dẫn
 app.use("/api", ngrokRoutes);
 
 app.set("views", `${__dirname}/views`);
