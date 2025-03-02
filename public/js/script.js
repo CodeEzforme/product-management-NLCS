@@ -323,6 +323,20 @@ setInterval(() => {
     }
 }, 10000);
 
+// Hàm lấy URL ngrok tự động
+async function getNgrokUrl() {
+    try {
+        // let response = await fetch("https://chaluatungloan.food/api/get-ngrok");
+        let response = await fetch("http://127.0.0.1:4000/get-ngrok");  // Thay vì gọi VPS, gọi localhost
+        let data = await response.json();
+        return data.ngrok_url;
+    } catch (error) {
+        console.error("❌ Lỗi khi lấy URL Ngrok từ localhost:", error);
+        // console.error("❌ Lỗi khi lấy URL Ngrok từ VPS:", error);
+        return "https://default-ngrok-url.ngrok-free.app"; // URL mặc định nếu có lỗi
+    }
+}
+
 
 // ✅ Đảm bảo thông báo biến mất khi mở chatbox và thêm toàn bộ sự kiện trong một DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -481,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 // ✅ Ẩn Preview sau khi gửi tin nhắn
-    function sendMessage() {
+    async function sendMessage() {
         const msg = chatInput.value.trim();
         if (msg === '' && !selectedImage) return;
 
@@ -505,6 +519,10 @@ document.addEventListener('DOMContentLoaded', () => {
         chatInput.value = '';
         chatBody.scrollTop = chatBody.scrollHeight;
 
+        // 🚀 Lấy URL Ngrok mới nhất từ VPS
+        const ngrokUrl = await getNgrokUrl();
+        const apiUrl = `${ngrokUrl}/chat/`;
+
         const formData = new FormData();
         formData.append('message', msg);
         if (imageToSend) {
@@ -513,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // kết nối sever
         // fetch('http://127.0.0.1:8000/chat/', {
-        fetch('https://7857-2402-800-6315-c363-3c16-e730-b8e2-9a9b.ngrok-free.app/chat/',{
+        fetch(apiUrl,{
             method: 'POST',
             // headers: {
             //     'ngrok-skip-browser-warning': 'true'  // Bỏ qua cảnh báo ngrok

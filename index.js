@@ -12,6 +12,7 @@ const {
 } = require("socket.io");
 require('dotenv').config();
 
+
 const database = require("./config/database");
 const systemConfig = require("./config/system");
 
@@ -23,6 +24,9 @@ const route = require("./routes/client/index.route");
 
 const app = express();
 const port = process.env.PORT;
+
+const ngrokRoutes = require("./routes/client/ngrok"); // Đúng đường dẫn
+app.use("/api", ngrokRoutes);
 
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
