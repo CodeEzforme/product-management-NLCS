@@ -63,13 +63,21 @@ io.on("connection", (socket) => {
 });
 
 // Flash
-app.use(cookieParser("LGASGFSAADSJFD"));
-app.use(session({
-    cookie: {
-        maxAge: 60000
-    }
-}));
+// app.use(cookieParser("LGASGFSAADSJFD"));
+// app.use(session({
+//     cookie: {
+//         maxAge: 60000
+//     }
+// }));
 app.use(flash());
+
+app.use(session({
+    secret: "LGASGFSAADSJFD",
+    resave: false, // ✅ Không lưu session nếu không có thay đổi
+    saveUninitialized: true, // ✅ Tạo session mới nếu chưa có
+    cookie: { maxAge: 60000 }
+}));
+
 // Hết Flash
 
 // tinymce
