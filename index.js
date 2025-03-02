@@ -5,11 +5,10 @@ const flash = require("express-flash");
 const cookieParser = require("cookie-parser")
 const session = require("express-session");
 const moment = require("moment");
+const cors = require("cors");  // ✅ Thêm dòng này để import CORS middleware
 var path = require('path');
 const http = require("http");
-const {
-    Server
-} = require("socket.io");
+const { Server } = require("socket.io");
 require('dotenv').config();
 
 
@@ -25,7 +24,7 @@ const route = require("./routes/client/index.route");
 const app = express();
 const port = process.env.PORT;
 
-const cors = require("cors");  // ✅ Thêm dòng này để import CORS middleware
+
 app.use(cors());
 app.use(express.json()); // ✅ Cần có dòng này để parse JSON từ request body
 app.use(express.urlencoded({ extended: true })); // ✅ Hỗ trợ dữ liệu form
@@ -35,10 +34,33 @@ app.use("/api", ngrokRoutes);
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
-// // Socket.io
+// // // Socket.io
 const server = http.createServer(app);
-const io = new Server(server);
-global._io = io;
+// const io = new Server(server);
+// global._io = io;
+
+// ✅ Cấu hình WebSocket
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    },
+    transports: ["polling", "websocket"],  // ✅ Hỗ trợ cả polling & websocket
+    allowEIO3: true  // ✅ Hỗ trợ phiên bản socket.io cũ
+});
+
+io.on("connection", (socket) => {
+    console.log("🟢 WebSocket kết nối thành công!");
+
+    socket.on("message", (msg) => {
+        console.log("📩 Tin nhắn nhận được:", msg);
+        io.emit("message", msg); // Gửi lại cho tất cả client
+    });
+
+    socket.on("disconnect", () => {
+        console.log("🔴 WebSocket bị ngắt kết nối!");
+    });
+});
 
 // Flash
 app.use(cookieParser("LGASGFSAADSJFD"));
