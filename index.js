@@ -63,7 +63,7 @@ io.on("connection", (socket) => {
 });
 
 // Flash
-// app.use(cookieParser("LGASGFSAADSJFD"));
+app.use(cookieParser("LGASGFSAADSJFD"));
 // app.use(session({
 //     cookie: {
 //         maxAge: 60000
