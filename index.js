@@ -36,33 +36,33 @@ app.set("view engine", "pug");
 
 // // // Socket.io
 const server = http.createServer(app);
-// const io = new Server(server);
-// global._io = io;
-
-// ✅ Cấu hình WebSocket
-const io = new Server(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-    },
-    transports: ["polling", "websocket"],  // ✅ Hỗ trợ cả polling & websocket
-    allowEIO3: true  // ✅ Hỗ trợ phiên bản socket.io cũ
-});
-
+const io = new Server(server);
 global._io = io;
 
-io.on("connection", (socket) => {
-    console.log("🟢 WebSocket kết nối thành công!");
+// // ✅ Cấu hình WebSocket
+// const io = new Server(server, {
+//     cors: {
+//         origin: "*",
+//         methods: ["GET", "POST"]
+//     },
+//     transports: ["polling", "websocket"],  // ✅ Hỗ trợ cả polling & websocket
+//     allowEIO3: true  // ✅ Hỗ trợ phiên bản socket.io cũ
+// });
 
-    socket.on("message", (msg) => {
-        console.log("📩 Tin nhắn nhận được:", msg);
-        io.emit("message", msg); // Gửi lại cho tất cả client
-    });
+// global._io = io;
 
-    socket.on("disconnect", () => {
-        console.log("🔴 WebSocket bị ngắt kết nối!");
-    });
-});
+// io.on("connection", (socket) => {
+//     console.log("🟢 WebSocket kết nối thành công!");
+
+//     socket.on("message", (msg) => {
+//         console.log("📩 Tin nhắn nhận được:", msg);
+//         io.emit("message", msg); // Gửi lại cho tất cả client
+//     });
+
+//     socket.on("disconnect", () => {
+//         console.log("🔴 WebSocket bị ngắt kết nối!");
+//     });
+// });
 
 // Flash
 app.use(cookieParser("LGASGFSAADSJFD"));
