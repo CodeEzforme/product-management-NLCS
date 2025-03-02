@@ -326,16 +326,22 @@ setInterval(() => {
 // Hàm lấy URL ngrok tự động
 async function getNgrokUrl() {
     try {
-        // let response = await fetch("https://chaluatungloan.food/api/get-ngrok");
-        let response = await fetch("http://127.0.0.1:4000/get-ngrok");  // Thay vì gọi VPS, gọi localhost
-        let data = await response.json();
+        // ✅ Fetch API từ VPS thay vì localhost
+        const response = await fetch("https://chaluatungloan.food/api/get-ngrok");
+        const data = await response.json();
+        
+        if (!data.ngrok_url || data.ngrok_url === "Chưa có URL Ngrok nào được cập nhật!") {
+            throw new Error("URL Ngrok chưa được cập nhật!");
+        }
+        
+        console.log("✅ URL Ngrok mới:", data.ngrok_url);
         return data.ngrok_url;
     } catch (error) {
-        console.error("❌ Lỗi khi lấy URL Ngrok từ localhost:", error);
-        // console.error("❌ Lỗi khi lấy URL Ngrok từ VPS:", error);
-        return "https://default-ngrok-url.ngrok-free.app"; // URL mặc định nếu có lỗi
+        console.error("❌ Lỗi khi lấy URL Ngrok từ VPS:", error);
+        return null;
     }
 }
+
 
 
 // ✅ Đảm bảo thông báo biến mất khi mở chatbox và thêm toàn bộ sự kiện trong một DOMContentLoaded
