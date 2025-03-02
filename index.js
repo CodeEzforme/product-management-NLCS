@@ -5,7 +5,6 @@ const flash = require("express-flash");
 const cookieParser = require("cookie-parser")
 const session = require("express-session");
 const moment = require("moment");
-const cors = require("cors");  // ✅ Thêm dòng này để import CORS middleware
 var path = require('path');
 const http = require("http");
 const { Server } = require("socket.io");
@@ -24,7 +23,7 @@ const route = require("./routes/client/index.route");
 const app = express();
 const port = process.env.PORT;
 
-
+const cors = require("cors");  // ✅ Thêm dòng này để import CORS middleware
 app.use(cors());
 app.use(express.json()); // ✅ Cần có dòng này để parse JSON từ request body
 app.use(express.urlencoded({ extended: true })); // ✅ Hỗ trợ dữ liệu form
@@ -66,19 +65,19 @@ global._io = io;
 
 // Flash
 app.use(cookieParser("LGASGFSAADSJFD"));
-// app.use(session({
-//     cookie: {
-//         maxAge: 60000
-//     }
-// }));
+app.use(session({
+    cookie: {
+        maxAge: 60000
+    }
+}));
 app.use(flash());
 
-app.use(session({
-    secret: "LGASGFSAADSJFD",
-    resave: true, // ✅ Không lưu session nếu không có thay đổi
-    saveUninitialized: true, // ✅ Tạo session mới nếu chưa có
-    cookie: { maxAge: 60000 }
-}));
+// app.use(session({
+//     secret: "LGASGFSAADSJFD",
+//     resave: true, // ✅ Không lưu session nếu không có thay đổi
+//     saveUninitialized: true, // ✅ Tạo session mới nếu chưa có
+//     cookie: { maxAge: 60000 }
+// }));
 
 // Hết Flash
 
