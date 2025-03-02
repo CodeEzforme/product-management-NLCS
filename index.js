@@ -61,6 +61,7 @@ io.on("connection", (socket) => {
         console.log("🔴 WebSocket bị ngắt kết nối!");
     });
 });
+global._io = io;
 
 // Flash
 app.use(cookieParser("LGASGFSAADSJFD"));
