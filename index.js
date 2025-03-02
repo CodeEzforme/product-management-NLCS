@@ -49,6 +49,8 @@ const io = new Server(server, {
     allowEIO3: true  // ✅ Hỗ trợ phiên bản socket.io cũ
 });
 
+global._io = io;
+
 io.on("connection", (socket) => {
     console.log("🟢 WebSocket kết nối thành công!");
 
@@ -61,7 +63,6 @@ io.on("connection", (socket) => {
         console.log("🔴 WebSocket bị ngắt kết nối!");
     });
 });
-global._io = io;
 
 // Flash
 app.use(cookieParser("LGASGFSAADSJFD"));
