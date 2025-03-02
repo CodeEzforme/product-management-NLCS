@@ -73,7 +73,7 @@ app.use(flash());
 
 app.use(session({
     secret: "LGASGFSAADSJFD",
-    resave: false, // ✅ Không lưu session nếu không có thay đổi
+    resave: true, // ✅ Không lưu session nếu không có thay đổi
     saveUninitialized: true, // ✅ Tạo session mới nếu chưa có
     cookie: { maxAge: 60000 }
 }));
