@@ -131,7 +131,7 @@ module.exports.edit = async (req, res) => {
     }
 }
 
-// [PATCH] /admin/user/edit////// lỗi req.body.password đã bị ẩn ròi do đụng độ các middllewe hoặc 
+// [PATCH] /admin/user/edit////// lỗi req.body.password đã bị ẩn do đụng độ các middllewe
 module.exports.editPatch = async (req, res) => {
     try {
         if (req.body.password) {
