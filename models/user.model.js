@@ -29,7 +29,8 @@ const usersSchema = new mongoose.Schema({
   },
   deletedAt: Date
 }, {
-  timestamps: true
+  timestamps: true,
+  strict: true
 })
 
 const Users = mongoose.model("Users", usersSchema, 'users');

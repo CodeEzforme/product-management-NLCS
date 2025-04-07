@@ -179,8 +179,21 @@ module.exports.registerPost = async (req, res) => {
 
         req.body.password = md5(req.body.password);
 
-        const newUser = new Users(req.body);
+        // Lấy các trường cần thiết
+        const { fullName, email, password } = req.body; 
+
+        // Tạo user
+        const newUser = new Users({
+            fullName,
+            email,
+            password
+        });
+
+        // Lưu DB
         await newUser.save();
+
+        // const newUser = new Users(req.body); nguyên nhẫn bị hack chỗ tokenUser
+        // await newUser.save();
         console.log(newUser);
         ///// kết bạn với Shop chả lụa Tùng Loan///////////////////////////////////
         const currentUserId = newUser._id;

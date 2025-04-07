@@ -177,7 +177,7 @@ module.exports.resetPasswordPost = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       req.flash('error', errors.array()[0].msg);
-      return res.redirect('back');
+      return res.redirect(req.get("Referrer") || "/");
     }
     next();
   }
